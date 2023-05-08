@@ -1,0 +1,17 @@
+.row {
+  display: flex;
+  justify-content: space-evenly;
+  /* margin-bottom: 0 !important; */
+  width: 100%;
+}
+
+#navbarContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2rem;
+}
+
+#navbarContainer > span {
+  margin-bottom: 0;
+}

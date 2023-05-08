@@ -1,8 +1,12 @@
 import React from 'react'
+import Header from '../Header/Header'
 
 const Products = () => {
   return (
-    <div>Products</div>
+    <>
+      <Header />
+      <h1>Main page displaying products</h1>
+    </>
   )
 }
 
