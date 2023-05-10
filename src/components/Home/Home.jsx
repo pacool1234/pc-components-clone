@@ -5,6 +5,7 @@ const Home = () => {
   return (
     <>
       <Header />
+      {/* Clone main page from PC Componentes here */}
     </>
   );
 };

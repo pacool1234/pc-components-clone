@@ -7,6 +7,7 @@ import Cart from './components/Cart/Cart'
 import Register from './components/Register/Register';
 import Login from './components/Login/Login';
 import { GlobalProvider } from './context/GlobalState';
+import { UserProvider } from './context/UserContext/UserState';
 
 function App() {
 
@@ -14,15 +15,17 @@ function App() {
     <>
       <BrowserRouter>
         <GlobalProvider>
-          <Routes>
-            <Route path="/" element={<Products />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-          </Routes>
+          <UserProvider>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+            </Routes>
+          </UserProvider>
         </GlobalProvider>
       </BrowserRouter>
     </>

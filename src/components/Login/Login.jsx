@@ -1,30 +1,22 @@
-import React from "react";
-import { useState, useRef } from "react";
+import React, { useContext } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "./Login.css";
+import { UserContext } from "../../context/UserContext/UserState";
 
 const Login = () => {
-  let maxId = 1;
+  const { login, message, role, token } = useContext(UserContext);
   const [data, setData] = useState({
-    name: "",
     email: "",
+    password: "",
   });
-  const [btnDisabled, setBtnDisabled] = useState(true);
-  const [message, setMessage] = useState("");
   let navigate = useNavigate();
 
-  const nameRef = useRef(null);
+  const passwordRef = useRef(null);
   const emailRef = useRef(null);
   const alertRef = useRef(null);
 
   const handleInputChange = (event) => {
-    if (data.name.length + 1 < 3) {
-      setMessage("Name must be at least 3 characters");
-      setBtnDisabled(true);
-    } else {
-      setMessage(null);
-      setBtnDisabled(false);
-    }
     setData({
       ...data,
       [event.target.name]: event.target.value,
@@ -33,30 +25,27 @@ const Login = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Send to LocalStorage
-    const dataArray = JSON.parse(localStorage.getItem("formDataArray")) || [];
-    if (dataArray.length > 0) {
-      maxId = Math.max(...dataArray.map((o) => o.id));
-      maxId++;
-    }
-    const formData = {
-      id: maxId,
-      ...data,
-    };
-    dataArray.push(formData);
-    console.log(maxId);
-    localStorage.setItem("formDataArray", JSON.stringify(dataArray));
+    login(data);
     // Reset data
     setData({
-      name: "",
       email: "",
+      password: "",
     });
+
     // Redirect to Home Page
     alertRef.current.classList.remove("hidden");
     setTimeout(() => {
       navigate("/");
     }, 1500);
   };
+
+  useEffect(() => {
+    if (token) {
+      console.log("role", role);
+      console.log("message", message);
+      // Maybe implement success notification here?
+    }
+  }, [token]);
 
   return (
     <div>
@@ -66,16 +55,6 @@ const Login = () => {
         </Link>
       </div>
       <form onSubmit={handleSubmit}>
-        <div ref={nameRef} className="form-group">
-          <input
-            type="text"
-            placeholder="name"
-            value={data.name}
-            onChange={handleInputChange}
-            name="name"
-          />
-        </div>
-        <span>{message}</span>
         <div ref={emailRef} className="form-group">
           <input
             type="email"
@@ -85,12 +64,19 @@ const Login = () => {
             name="email"
           />
         </div>
-        <button type="submit" disabled={btnDisabled}>
-          Enviar
-        </button>
+        <div ref={passwordRef} className="form-group">
+          <input
+            type="text"
+            placeholder="password"
+            value={data.password}
+            onChange={handleInputChange}
+            name="password"
+          />
+        </div>
+        <button type="submit">Enviar</button>
       </form>
       <div className="alert alert-success hidden" role="alert" ref={alertRef}>
-        Your info has been submitted
+        {message}
       </div>
       <p className="hLine">
         <span>Not a member yet?</span>
