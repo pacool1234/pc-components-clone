@@ -1,5 +1,14 @@
-.hidden {
-  display: none;
+main {
+  display: flex;
+  align-items: center;
+}
+
+section {
+  padding: 2rem;
+}
+
+#leftSection {
+  border-right: 1px solid rgb(204, 204, 204);
 }
 
 .alert {
@@ -31,14 +40,20 @@ form {
 }
 
 .hLine {
-  width: 100%; 
-  text-align: center; 
-  border-bottom: 1px solid #000; 
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid #000;
   line-height: 0.1em;
-  margin: 10px 0 20px; 
-} 
+  margin: 10px 0 20px;
+}
 
-p > span { 
-   background:#fff; 
-   padding:0 10px; 
+p > span {
+  background: #fff;
+  padding: 0 10px;
+}
+
+.toast-header, .toast-body {
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
 }

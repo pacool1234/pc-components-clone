@@ -25,7 +25,7 @@ const Header = () => {
             </Link>
           </span>
           <span className="col">
-            <button>Log out</button>
+            <button className="btn btn-primary">Log out</button>
           </span>
         </div>
       </nav>
