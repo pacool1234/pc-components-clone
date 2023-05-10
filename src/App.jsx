@@ -6,12 +6,14 @@ import Profile from './components/Profile/Profile'
 import Cart from './components/Cart/Cart'
 import Register from './components/Register/Register';
 import Login from './components/Login/Login';
+import { GlobalProvider } from './context/GlobalState';
 
 function App() {
 
   return (  
     <>
       <BrowserRouter>
+        <GlobalProvider>
           <Routes>
             <Route path="/" element={<Products />} />
             <Route path="/home" element={<Home />} />
@@ -21,6 +23,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
           </Routes>
+        </GlobalProvider>
       </BrowserRouter>
     </>
   )

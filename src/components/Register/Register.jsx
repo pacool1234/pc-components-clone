@@ -1,7 +1,7 @@
-import React from 'react'
+import React from "react";
 import { useState, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import "./Register.css"
+import "./Register.css";
 
 const Register = () => {
   let maxId = 1;
@@ -16,7 +16,7 @@ const Register = () => {
   const nameRef = useRef(null);
   const emailRef = useRef(null);
   const alertRef = useRef(null);
-  
+
   const handleInputChange = (event) => {
     if (data.name.length + 1 < 3) {
       setMessage("Name must be at least 3 characters");
@@ -52,7 +52,7 @@ const Register = () => {
       email: "",
     });
     // Redirect to Home Page
-    alertRef.current.classList.remove('hidden')
+    alertRef.current.classList.remove("hidden");
     setTimeout(() => {
       navigate("/");
     }, 1500);
@@ -60,39 +60,75 @@ const Register = () => {
 
   return (
     <>
-      <div>Register</div>
-      <div>
-      <Link to="/"><span className="material-icons">home</span></Link>
-      </div>
-      <form onSubmit={handleSubmit}>
-        <div ref={nameRef} className="form-group">
-          <input
-            type="text"
-            placeholder="name"
-            value={data.name}
-            onChange={handleInputChange}
-            name="name"
-          />
-        </div>
-        <span>{message}</span>
-        <div ref={emailRef} className="form-group">
-          <input
-            type="email"
-            placeholder="email"
-            value={data.email}
-            onChange={handleInputChange}
-            name="email"
-          />
-        </div>
-        <button type="submit" disabled={btnDisabled}>
-          Enviar
-        </button>
-      </form>
-      <div className="alert alert-success hidden" role="alert" ref={alertRef}>
-        Your info has been submitted
-      </div>
+      <header>
+        <Link to="/">
+          <img src="../src/images/logo.png" width="69" height="24" />
+        </Link>
+      </header>
+      <main>
+        <section id="leftSection">
+          <div>
+            <img src="" alt="" />
+            <div>
+              <h4>AAAAAA</h4>
+              <span>aaaaaaa</span>
+            </div>
+          </div>
+          <div>
+            <img src="" alt="" />
+            <div>
+              <h4>BBBBBB</h4>
+              <span>bbbbbb</span>
+            </div>
+          </div>
+        </section>
+        <section id="rightSection">
+          <div>Register</div>
+          <form onSubmit={handleSubmit}>
+            <div ref={nameRef} className="form-group">
+              <input
+                type="text"
+                placeholder="name"
+                value={data.name}
+                onChange={handleInputChange}
+                name="name"
+              />
+            </div>
+            <span>{message}</span>
+            <div ref={emailRef} className="form-group">
+              <input
+                type="email"
+                placeholder="email"
+                value={data.email}
+                onChange={handleInputChange}
+                name="email"
+              />
+            </div>
+            <button type="submit" disabled={btnDisabled}>
+              Enviar
+            </button>
+          </form>
+          <div
+            className="alert alert-success hidden"
+            role="alert"
+            ref={alertRef}
+          >
+            Your info has been submitted
+          </div>
+          <p className="hLine">
+            <span>I already have an account</span>
+          </p>
+          <div>
+            <Link to="/login">
+              <button type="button" className="buttonLink">
+                Log in
+              </button>
+            </Link>
+          </div>
+        </section>
+      </main>
     </>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;

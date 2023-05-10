@@ -1,3 +1,17 @@
+main {
+  display: flex;
+  align-items: center;
+}
+
+section {
+  padding: 2rem;
+}
+
+#leftSection {
+  border-right: 1px solid rgb(204, 204, 204);
+}
+
+
 .hidden {
   display: none;
 }
@@ -26,11 +40,7 @@ form {
   border-radius: 8px;
 }
 
-.form > button {
-  color: blue;
-}
-
-p {
+.hLine {
   width: 100%; 
   text-align: center; 
   border-bottom: 1px solid #000; 
@@ -41,4 +51,8 @@ p {
 p > span { 
    background:#fff; 
    padding:0 10px; 
+}
+
+button, button>:visited {
+  cursor: pointer;
 }

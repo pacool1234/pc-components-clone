@@ -30,7 +30,7 @@ form {
   color: blue;
 }
 
-p {
+.hLine {
   width: 100%; 
   text-align: center; 
   border-bottom: 1px solid #000; 

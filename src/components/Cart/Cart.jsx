@@ -1,8 +1,12 @@
 import React from 'react'
+import Header from '../Header/Header'
 
 const Cart = () => {
   return (
-    <div>Cart</div>
+    <>
+      <Header />
+      <h1>Shopping cart</h1>
+    </>
   )
 }
 

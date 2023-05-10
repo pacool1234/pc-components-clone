@@ -1,8 +1,7 @@
 import React from "react";
 import { useState, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import "./Login.css"
-
+import "./Login.css";
 
 const Login = () => {
   let maxId = 1;
@@ -17,7 +16,7 @@ const Login = () => {
   const nameRef = useRef(null);
   const emailRef = useRef(null);
   const alertRef = useRef(null);
-  
+
   const handleInputChange = (event) => {
     if (data.name.length + 1 < 3) {
       setMessage("Name must be at least 3 characters");
@@ -53,7 +52,7 @@ const Login = () => {
       email: "",
     });
     // Redirect to Home Page
-    alertRef.current.classList.remove('hidden')
+    alertRef.current.classList.remove("hidden");
     setTimeout(() => {
       navigate("/");
     }, 1500);
@@ -62,7 +61,9 @@ const Login = () => {
   return (
     <div>
       <div>
-        <Link to="/"><span className="material-icons">home</span></Link>
+        <Link to="/">
+          <img src="../src/images/logo.png" width="69" height="24" />
+        </Link>
       </div>
       <form onSubmit={handleSubmit}>
         <div ref={nameRef} className="form-group">
@@ -91,13 +92,16 @@ const Login = () => {
       <div className="alert alert-success hidden" role="alert" ref={alertRef}>
         Your info has been submitted
       </div>
-      <p><span>Not a member yet?</span></p>
+      <p className="hLine">
+        <span>Not a member yet?</span>
+      </p>
       <div>
-        <button>
-          <Link to="/register">Sign up</Link>
-        </button>
+        <Link to="/register">
+          <button type="button" className="buttonLink">
+            Sign up
+          </button>
+        </Link>
       </div>
-
     </div>
   );
 };
