@@ -7,6 +7,18 @@ const users = (state, action) => {
         role: action.payload.user.role,
         message: action.payload.message,
       };
+    case "GET_USER_INFO":
+      return {
+        ...state,
+        user: action.payload
+      };
+    case "LOGOUT":
+      return {
+        ...state,
+        user: null,
+        role: null,
+        token: null,
+      };
     default:
       return state;
   }

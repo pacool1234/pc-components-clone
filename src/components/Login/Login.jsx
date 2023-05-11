@@ -15,6 +15,7 @@ const Login = () => {
 
   const passwordRef = useRef(null);
   const emailRef = useRef(null);
+  const toastRef = useRef(null);
 
   const handleInputChange = (event) => {
     setData({
@@ -31,6 +32,11 @@ const Login = () => {
       email: "",
       password: "",
     });
+    if (token) {
+      toastRef.current.innerHTML = "You have successfully logged in";
+    } else {
+      toastRef.current.innerHTML = "Incorrect email/password";
+    }
     setShowToast(true);
   };
 
@@ -118,8 +124,7 @@ const Login = () => {
             aria-live="assertive"
             aria-atomic="true"
           >
-            <div className="toast-header">
-              <strong className="me-auto"></strong>
+            <div className="toast-body">
               <button
                 type="button"
                 className="btn-close"
@@ -127,8 +132,7 @@ const Login = () => {
                 onClick={() => setShowToast(false)}
               ></button>
             </div>
-            <div className="toast-body">You have logged in successfully!</div>
-            <div className="toast-body"></div>
+            <div className="toast-body" ref={toastRef}></div>
           </div>
 
           <p className="hLine">

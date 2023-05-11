@@ -4,7 +4,7 @@ import "./Header.css";
 import { UserContext } from "../../context/UserContext/UserState";
 
 const Header = () => {
-  const { token } = useContext(UserContext)
+  const { token, logout } = useContext(UserContext)
   return (
     <>
       <nav className="navbar navbar-light bg-light myNavbar">
@@ -25,9 +25,6 @@ const Header = () => {
             <Link to="/cart">
               <span className="material-icons">shopping_cart</span>
             </Link>
-          </span>
-          <span className="col">
-            <button className="btn btn-primary">Log out</button>
           </span>
         </div>
       </nav>
