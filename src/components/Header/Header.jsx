@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import "./Header.css";
+import { UserContext } from "../../context/UserContext/UserState";
 
 const Header = () => {
+  const { token } = useContext(UserContext)
   return (
     <>
       <nav className="navbar navbar-light bg-light myNavbar">
@@ -17,7 +19,7 @@ const Header = () => {
             </Link>
           </span>
           <span className="col">
-            <Link to="/login">My account</Link>
+            {token ? <Link to="/profile">My account</Link> : <Link to="/login">My account</Link> }
           </span>
           <span className="col">
             <Link to="/cart">

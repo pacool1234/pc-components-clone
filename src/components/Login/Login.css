@@ -1,14 +1,27 @@
-main {
+.topHeader {
+  height: 150px;
   display: flex;
+  justify-content: center;
   align-items: center;
 }
 
-section {
+.sectionContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.section {
   padding: 2rem;
+  width: 40%;
 }
 
 #leftSection {
   border-right: 1px solid rgb(204, 204, 204);
+}
+
+.logoContainer {
+  max-width: 50%;
+  display: flex;
 }
 
 .alert {
