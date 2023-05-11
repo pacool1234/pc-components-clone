@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import "./Header.css";
+import "./Header.scss";
 import { UserContext } from "../../context/UserContext/UserState";
 
 const Header = () => {

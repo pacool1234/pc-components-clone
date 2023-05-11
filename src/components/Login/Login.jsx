@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { useState, useRef, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import "./Login.css";
+import "./Login.scss";
 import { UserContext } from "../../context/UserContext/UserState";
 
 const Login = () => {
@@ -106,7 +106,7 @@ const Login = () => {
             </div>
             <div ref={passwordRef} className="form-group">
               <input
-                type="text"
+                type="password"
                 placeholder="password"
                 value={data.password}
                 onChange={handleInputChange}

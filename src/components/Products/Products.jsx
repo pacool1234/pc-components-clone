@@ -1,16 +1,36 @@
 import React, { useContext, useEffect, useState } from "react";
 import Header from "../Header/Header";
 import { GlobalContext } from "../../context/GlobalState";
-import "./Products.scss"
+import "./Products.scss";
 
 const Products = () => {
-  const { products, getProducts, sortProductsAtoZ, sortProductsZtoA, sortHighestPrice,
-    sortLowestPrice } = useContext(GlobalContext);
-  const API_URL = "http://localhost:3000/"
+  const {
+    products,
+    getProducts,
+    sortProductsAtoZ,
+    sortProductsZtoA,
+    sortHighestPrice,
+    sortLowestPrice,
+  } = useContext(GlobalContext);
+  const API_URL = "http://localhost:3000/";
 
   useEffect(() => {
     getProducts();
   }, []);
+
+  const productsContainer = products.map((product) => {
+    return (
+      <div key={product.id} width={200} height={250}>
+        <img
+          src={API_URL + "uploaded_imgs/" + product.image}
+          height={150}
+          width={150}
+        />
+        <p>{product.name}</p>
+        <p>{product.price} €</p>
+      </div>
+    );
+  });
 
   return (
     <>
@@ -33,17 +53,7 @@ const Products = () => {
           <span>{products.length} items</span>
         </div>
       </div>
-      <div className="picturesContainer">
-        {products.map((product) => {
-          return (
-            <div key={product.id} width={200} height={250}>
-              <img src={API_URL + 'uploaded_imgs/' + product.image} height={150} width={150} />
-              <p>{product.name}</p>
-              <p>{product.price} €</p>
-            </div>
-          );
-        })}
-      </div>
+      <div className="picturesContainer">{productsContainer}</div>
     </>
   );
 };

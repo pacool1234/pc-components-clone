@@ -9,14 +9,18 @@ const Profile = () => {
 
   useEffect(() => {
     getUserInfo();
-    console.log(user.name);
-  }, [user]);
+    // console.log(user.name);
+  }, []);
+  useEffect(() => {
+    if (!token) {
+      navigate('/login')
+    }
+  }, [token])
 
-  // useEffect(() => {
-  //   if (!token) {
-  //     navigate('/login')
-  //   }
-  // }, [token])
+  if (!user) {
+    return 'loading'
+  }
+
 
   return (
     <>
