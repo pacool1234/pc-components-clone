@@ -1,19 +1,20 @@
 import React, { createContext, useReducer } from "react";
-import AppReducer from "./AppReducer";
+import AppReducer from "./ProductReducer";
 import axios from "axios";
 
 const initialState = {
   products: [],
 };
 
-export const GlobalContext = createContext(initialState);
+export const ProductContext = createContext(initialState);
 
-export const GlobalProvider = ({ children }) => {
+export const ProductProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
   const getProducts = async (id) => {
     const res = await axios.get("http://localhost:3000/products/getAll");
     const productsFiltered = res.data.filter(product => product.Category.id == id)
+    console.log(id);
     dispatch({
       type: "GET_PRODUCTS",
       payload: productsFiltered,
@@ -44,8 +45,17 @@ export const GlobalProvider = ({ children }) => {
     });
   };
 
+  const getSingleProduct = async (id) => {
+    const res = await axios.get("http://localhost:3000/products/getAll");
+    const productsFiltered = res.data.filter(product => product.id == id)
+    dispatch({
+      type: "GET_PRODUCTS",
+      payload: productsFiltered,
+    });
+  };
+
   return (
-    <GlobalContext.Provider
+    <ProductContext.Provider
       value={{
         products: state.products,
         getProducts,
@@ -53,9 +63,10 @@ export const GlobalProvider = ({ children }) => {
         sortProductsZtoA,
         sortHighestPrice,
         sortLowestPrice,
+        getSingleProduct,
       }}
     >
       {children}
-    </GlobalContext.Provider>
+    </ProductContext.Provider>
   );
 };

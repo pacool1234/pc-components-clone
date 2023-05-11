@@ -1,0 +1,24 @@
+.mainProduct {
+  display: flex;
+  justify-content: center;
+  margin-top: 80px;
+}
+
+.imgSection, .infoSection {
+  padding: 2rem;
+  width: 40%;
+}
+
+.singleImg {
+  width: 100%;
+}
+
+.singleProductName {
+  text-align: left;
+}
+
+.productPrice {
+    color: #ff6000;
+    font-size: 1.5rem;
+    font-weight: 700;
+}

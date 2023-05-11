@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import Header from "../Header/Header";
 import { CategoryContext } from "../../context/CategoryContext/CategoryState";
 import { useNavigate } from "react-router-dom";
-import "./Home.scss"
+import "./Home.scss";
 
 const Home = () => {
   const { categories, getCategories } = useContext(CategoryContext);
@@ -11,11 +11,16 @@ const Home = () => {
 
   const categoriesDiv = categories.map((category) => {
     return (
-      <div key={category.id} className="categoryImg" onClick={() => navigate(`/products/${category.id}`)}>
+      <div
+        key={category.id}
+        className="imgDiv"
+        onClick={() => navigate(`/products/${category.id}`)}
+      >
         <img
           src={API_URL + "uploaded_imgs/" + category.image}
-          height={150}
-          width={150}
+          className="catImg"
+          // height={150}
+          // width={150}
         />
       </div>
     );
@@ -28,8 +33,10 @@ const Home = () => {
   return (
     <>
       <Header />
-      <h1>Home page</h1>
-      <div className="categories">{categoriesDiv}</div>
+      <div className="orange">
+        <img src="../src/images/orange_days.png" className="orangeImg"/>
+        <div className="categories">{categoriesDiv}</div>
+      </div>
     </>
   );
 };

@@ -1,14 +1,29 @@
+.orange {
+  background-color: #ff6000;
+  padding: 20px 95px;
+  margin-top: 80px;
+}
+
+.orangeImg {
+  width: 100%;
+  margin-bottom: 5%;
+}
+
 .categories {
   display: flex;
   flex-wrap: wrap;
-  background-color: #ff6000;
-  padding: 20px 5px;
+  justify-content: center;
 }
 
-.categoryImg {
+.imgDiv {
   margin: 10px;
+  max-width: 13rem;
 }
 
-.categoryImg:hover {
+.imgDiv:hover {
   cursor: pointer;;
+}
+
+.catImg {
+  width: 100%;
 }
