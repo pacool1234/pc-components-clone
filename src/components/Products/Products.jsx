@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import Header from "../Header/Header";
 import { GlobalContext } from "../../context/GlobalState";
 import "./Products.scss";
+import { useParams } from "react-router-dom";
 
 const Products = () => {
   const {
@@ -14,8 +15,10 @@ const Products = () => {
   } = useContext(GlobalContext);
   const API_URL = "http://localhost:3000/";
 
+  const { id } = useParams();
+
   useEffect(() => {
-    getProducts();
+    getProducts(id);
   }, []);
 
   const productsContainer = products.map((product) => {

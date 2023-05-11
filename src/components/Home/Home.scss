@@ -1,0 +1,14 @@
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #ff6000;
+  padding: 20px 5px;
+}
+
+.categoryImg {
+  margin: 10px;
+}
+
+.categoryImg:hover {
+  cursor: pointer;;
+}

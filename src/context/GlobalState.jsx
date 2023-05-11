@@ -11,11 +11,12 @@ export const GlobalContext = createContext(initialState);
 export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
-  const getProducts = async () => {
+  const getProducts = async (id) => {
     const res = await axios.get("http://localhost:3000/products/getAll");
+    const productsFiltered = res.data.filter(product => product.Category.id == id)
     dispatch({
       type: "GET_PRODUCTS",
-      payload: res.data,
+      payload: productsFiltered,
     });
   };
 

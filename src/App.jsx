@@ -8,6 +8,7 @@ import Register from './components/Register/Register';
 import Login from './components/Login/Login';
 import { GlobalProvider } from './context/GlobalState';
 import { UserProvider } from './context/UserContext/UserState';
+import { CategoryProvider } from './context/CategoryContext/CategoryState';
 
 function App() {
 
@@ -16,15 +17,17 @@ function App() {
       <BrowserRouter>
         <GlobalProvider>
           <UserProvider>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/products" element={<Products />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/cart" element={<Cart />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-            </Routes>
+            <CategoryProvider>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/products/:id" element={<Products />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+              </Routes>
+            </CategoryProvider>
           </UserProvider>
         </GlobalProvider>
       </BrowserRouter>
