@@ -5,6 +5,7 @@ const products = (state, action) => {
         ...state,
         products: action.payload,
       };
+
     case "SORT":
       const sorted = state.products.sort(function (a, b) {
         let keyA, keyB;
@@ -25,6 +26,7 @@ const products = (state, action) => {
         ...state,
         products: sorted,
       };
+
     case "ADD_CART":
       const cartFromLS = JSON.parse(localStorage.getItem("cart"));
       const productAlreadyPresent = cartFromLS.some(
@@ -34,6 +36,7 @@ const products = (state, action) => {
         state.cart = state.cart.map((item) => {
           if (item.name == action.payload["name"]) {
             item.amount++;
+            state.totalPrice += Number(action.payload["price"])
           }
           return item;
         });
@@ -50,6 +53,25 @@ const products = (state, action) => {
           totalItems: state.cart.reduce((total, obj) => total + obj.amount, 0),
         };
       }
+
+    case "SUBTRACT_CART":
+      state.cart = state.cart.map((item) => {
+        if (item.name == action.payload["name"]) {
+          if (item.amount > 1) {
+            item.amount--;
+            state.totalPrice -= Number(action.payload["price"])
+          } else {
+            item.amount = 1;
+          }
+        }
+        return item;
+      });
+      return {
+        ...state,
+        cart: [...state.cart],
+        totalItems: state.cart.reduce((total, obj) => total + obj.amount, 0),
+      };
+
     case "CLEAR_CART":
       return {
         ...state,

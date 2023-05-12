@@ -13,10 +13,6 @@ const SingleProduct = () => {
   useEffect(() => {
     getSingleProduct(id);
   }, []);
-  
-  // DEBUG
-  useEffect(() => {
-  }, [cart]);
 
   const productsContainer = products.map((product) => {
     return (

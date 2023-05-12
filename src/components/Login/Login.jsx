@@ -124,14 +124,6 @@ const Login = () => {
             aria-live="assertive"
             aria-atomic="true"
           >
-            <div className="toast-body">
-              <button
-                type="button"
-                className="btn-close"
-                aria-label="Close"
-                onClick={() => setShowToast(false)}
-              ></button>
-            </div>
             <div className="toast-body" ref={toastRef}></div>
           </div>
 

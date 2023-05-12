@@ -1,3 +1,89 @@
-.mainCartDiv {
+.itemsHeaderDiv, .emptyCart {
   margin-top: 80px;
+}
+
+.itemContainer {
+  display: flex;
+}
+
+.itemsDiv,
+.totalDiv {
+  // margin-top: 2%;
+  margin: 0 3%;
+}
+
+.itemsDiv {
+  width: 70%;
+}
+
+.totalDiv {
+  width: 30%;
+  border: 1px solid rgb(204, 204, 204);
+  border-radius: 5px;
+  height: 250px;
+}
+
+.itemDiv {
+  border: 1px solid rgb(204, 204, 204);
+  border-radius: 5px;
+  margin-bottom: 2%;
+  display: flex;
+}
+
+.leftItemSubDiv {
+  width: 70%;
+}
+
+.rightItemSubDiv {
+  width: 30%;
+  display: flex;
+  justify-content: right;
+}
+
+.controller, .eraser {
+  display: flex;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  width: 120px;
+  height: 40px;
+  margin-top: 8%;
+  margin-right: 8%;
+}
+
+.control:hover, .eraser:hover {
+  cursor: pointer;
+  background-color: rgb(239, 239, 239);
+}
+
+.eraser {
+  width: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.controllerButton, .trashCan {
+  text-align: center;
+  vertical-align: middle;
+  line-height: 40px;
+
+}
+
+.controllerButton {
+  width: 33%;
+}
+
+.middleOne {
+  border-left: 1px solid lightgray;
+  border-right: 1px solid lightgray;
+}
+
+.trashCan {
+  color: gray;
+  font-size: 1.47rem;
+}
+
+.toast {
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
 }
