@@ -27,7 +27,7 @@ const products = (state, action) => {
         products: sorted,
       };
 
-    case "ADD_CART":
+    case "ADD_ITEM":
       const cartFromLS = JSON.parse(localStorage.getItem("cart"));
       const productAlreadyPresent = cartFromLS.some(
         (item) => item.name == action.payload["name"]
@@ -36,7 +36,8 @@ const products = (state, action) => {
         state.cart = state.cart.map((item) => {
           if (item.name == action.payload["name"]) {
             item.amount++;
-            state.totalPrice += Number(action.payload["price"])
+            // state.totalPrice += Number(action.payload["price"])
+            state.totalPrice += Number(action.payload["price"]) * (1 - Number(action.payload["discount"]) / 100)
           }
           return item;
         });
@@ -54,12 +55,13 @@ const products = (state, action) => {
         };
       }
 
-    case "SUBTRACT_CART":
+    case "SUBTRACT_ITEM":
       state.cart = state.cart.map((item) => {
         if (item.name == action.payload["name"]) {
           if (item.amount > 1) {
             item.amount--;
-            state.totalPrice -= Number(action.payload["price"])
+            // state.totalPrice -= Number(action.payload["price"])
+            state.totalPrice -= Number(action.payload["price"]) * (1 - Number(action.payload["discount"]) / 100)
           } else {
             item.amount = 1;
           }

@@ -5,7 +5,7 @@ import "./Singleproduct.scss";
 import { useParams } from "react-router-dom";
 
 const SingleProduct = () => {
-  const { products, getSingleProduct, addCart, cart } = useContext(ProductContext);
+  const { products, getSingleProduct, addItem, cart } = useContext(ProductContext);
   const API_URL = "http://localhost:3000/";
   const { id } = useParams();
   let productsToShow = []
@@ -51,7 +51,7 @@ const SingleProduct = () => {
                 )}
               </div>
               <div className="purchaseBlock">
-                <button onClick={() => addCart(product)}>Add to Cart</button>
+                <button onClick={() => addItem(product)}>Add to Cart</button>
               </div>
             </div>
           </section>

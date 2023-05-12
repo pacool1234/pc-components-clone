@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 const Cart = () => {
   const { token } = useContext(UserContext);
   const { createOrder } = useContext(OrderContext);
-  const { cart, addCart, subtractCart, clearCart, totalItems, totalPrice } = useContext(ProductContext);
+  const { cart, addItem, subtractItem, clearCart, totalItems, totalPrice } = useContext(ProductContext);
   const [showToast, setShowToast] = useState(false);
 
   const navigate = useNavigate();
@@ -33,9 +33,9 @@ const Cart = () => {
             <span className="material-icons trashCan eraserButton">delete</span>
           </div>
           <div className="controller">
-            <div className="controllerButton control" onClick={() => subtractCart(product)}>-</div>
+            <div className="controllerButton control" onClick={() => subtractItem(product)}>-</div>
             <div className="controllerButton middleOne">{product.amount}</div>
-            <div className="controllerButton control" onClick={() => addCart(product)}>+</div>
+            <div className="controllerButton control" onClick={() => addItem(product)}>+</div>
           </div>
         </div>
       </div>
@@ -75,7 +75,7 @@ const Cart = () => {
               <div className="itemsDiv">{itemsDiv}</div>
               <div className="totalDiv">
                 <h1>Total</h1>
-                <p>{totalPrice}</p>
+                <p>{totalPrice.toFixed(2)}</p>
                 <button onClick={() => handleOrder()}>Order</button>
               </div>
             </div>

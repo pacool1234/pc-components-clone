@@ -6,7 +6,7 @@ const API_URL = "http://localhost:3000/";
 
 const cart = JSON.parse(localStorage.getItem("cart")) || [];
 const totalItems = cart.reduce((total, obj) => total + obj.amount, 0);
-const totalPrice = cart.reduce((total, obj) => total + (Number(obj.amount) * Number(obj.price)), 0);
+const totalPrice = cart.reduce((total, obj) => total + Number(obj.amount) * Number(obj.price) * (1 - Number(obj.discount) / 100), 0);
 
 const initialState = {
   products: [],
@@ -50,16 +50,23 @@ export const ProductProvider = ({ children }) => {
     });
   };
 
-  const addCart = (product) => {
+  const addItem = (product) => {
     dispatch({
-      type: "ADD_CART",
+      type: "ADD_ITEM",
       payload: product,
     });
   };
 
-  const subtractCart = (product) => {
+  const subtractItem = (product) => {
     dispatch({
-      type: "SUBTRACT_CART",
+      type: "SUBTRACT_ITEM",
+      payload: product,
+    });
+  };
+
+  const deleteItem = (product) => {
+    dispatch({
+      type: "DELETE_ITEM",
       payload: product,
     });
   };
@@ -82,8 +89,9 @@ export const ProductProvider = ({ children }) => {
         getProducts,
         sort,
         getSingleProduct,
-        addCart,
-        subtractCart,
+        addItem,
+        subtractItem,
+        deleteItem,
         clearCart,
       }}
     >
