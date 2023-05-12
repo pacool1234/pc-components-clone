@@ -10,8 +10,6 @@ const Header = () => {
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
-    console.log("total in Header", totalItems);
-    console.log(cart);
   }, [cart])
 
   return (

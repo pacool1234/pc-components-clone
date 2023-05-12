@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const { token } = useContext(UserContext);
-  const { cart } = useContext(ProductContext);
+  const { cart, clearCart } = useContext(ProductContext);
   const navigate = useNavigate();
   const API_URL = "http://localhost:3000/";
 
@@ -58,6 +58,7 @@ const Cart = () => {
           </>
         )}
       </div>
+      <button onClick={() => clearCart()}>Clear cart</button>
     </>
   );
 };

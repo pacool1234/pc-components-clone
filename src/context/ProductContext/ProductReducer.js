@@ -31,16 +31,16 @@ const products = (state, action) => {
         (item) => item.name == action.payload["name"]
       );
       if (productAlreadyPresent) {
-        state.cart = state.cart.map(item => {
+        state.cart = state.cart.map((item) => {
           if (item.name == action.payload["name"]) {
-            item.amount ++
+            item.amount++;
           }
-          return item
-        })
+          return item;
+        });
         return {
           ...state,
           cart: [...state.cart],
-          totalItems: state.cart.reduce((total, obj) => total + obj.amount, 0)
+          totalItems: state.cart.reduce((total, obj) => total + obj.amount, 0),
         };
       } else {
         action.payload["amount"] = 1;
@@ -48,9 +48,15 @@ const products = (state, action) => {
         return {
           ...state,
           cart: [...state.cart, action.payload],
-          totalItems: state.cart.reduce((total, obj) => total + obj.amount, 0)
+          totalItems: state.cart.reduce((total, obj) => total + obj.amount, 0),
         };
       }
+      case "CLEAR_CART":
+        return {
+          ...state,
+          cart: [],
+          totalItems: 0,
+        }
     default:
       return state;
   }

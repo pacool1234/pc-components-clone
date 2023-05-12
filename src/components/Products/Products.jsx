@@ -45,10 +45,10 @@ const Products = () => {
       <h1>Main page displaying products</h1>
       <div className="filterContainer row">
         <div className="col">
-          <button onClick={() => sort("price", true)}>Lowest price OK</button>
+          <button onClick={() => sort("price", true)}>Lowest price</button>
         </div>
         <div className="col">
-          <button onClick={() => sort("price", false)}>Highest price OK</button>
+          <button onClick={() => sort("price", false)}>Highest price</button>
         </div>
         <div className="col">
           <button onClick={() => sort("name", true)}>A-Z</button>

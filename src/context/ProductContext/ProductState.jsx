@@ -4,7 +4,6 @@ import axios from "axios";
 
 const cart = JSON.parse(localStorage.getItem("cart")) || [];
 const totalItems = cart.reduce((total, obj) => total + obj.amount, 0);
-console.log("total in ProductState", totalItems);
 
 const initialState = {
   products: [],
@@ -54,6 +53,14 @@ export const ProductProvider = ({ children }) => {
     });
   };
 
+  const clearCart = () => {
+    dispatch({
+      type: "CLEAR_CART",
+    });
+  };
+
+
+
   return (
     <ProductContext.Provider
       value={{
@@ -64,6 +71,7 @@ export const ProductProvider = ({ children }) => {
         sort,
         getSingleProduct,
         addCart,
+        clearCart,
       }}
     >
       {children}
