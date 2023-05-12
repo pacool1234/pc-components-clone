@@ -17,8 +17,43 @@
   text-align: left;
 }
 
-.productPrice {
+.priceBlock {
+  display: flex;
+}
+
+.priceBlock > * {
+  margin-right: 15px;
+}
+
+.originalPriceDiv, .discountDiv > * {
+  margin-bottom: 0;
+}
+
+.discountProductPrice {
     color: #ff6000;
     font-size: 1.5rem;
     font-weight: 700;
+    white-space: nowrap;
+}
+
+.originalProductPrice {
+    color: gray;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-decoration: line-through
+}
+
+.pvp, .discountTitle {
+  color: rgb(195, 193, 193);
+}
+
+.discount {
+  background-color: crimson;
+  color: white;
+  font-weight: 600;
+  border-radius: 2px;
+}
+
+.hidden {
+  display: none;
 }

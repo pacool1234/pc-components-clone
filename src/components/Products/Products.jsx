@@ -12,6 +12,7 @@ const Products = () => {
     sortProductsZtoA,
     sortHighestPrice,
     sortLowestPrice,
+    sort,
   } = useContext(ProductContext);
 
   const API_URL = "http://localhost:3000/";
@@ -24,7 +25,13 @@ const Products = () => {
 
   const productsContainer = products.map((product) => {
     return (
-      <div key={product.id} width={200} height={250} onClick={() => navigate(`/single/${product.id}`)} className="productDiv">
+      <div
+        key={product.id}
+        width={200}
+        height={250}
+        onClick={() => navigate(`/single/${product.id}`)}
+        className="productDiv"
+      >
         <img
           src={API_URL + "uploaded_imgs/" + product.image}
           height={150}
@@ -42,17 +49,22 @@ const Products = () => {
       <h1>Main page displaying products</h1>
       <div className="filterContainer row">
         <div className="col">
-          <button onClick={sortProductsAtoZ}>A-Z</button>
+          {/* <button onClick={sortLowestPrice}>Lowest price</button> */}
+          <button onClick={() => sort("price", true)}>Lowest price</button>
         </div>
         <div className="col">
-          <button onClick={sortProductsZtoA}>Z-A</button>
+          {/* <button onClick={sortHighestPrice}>Highest price</button> */}
+          <button onClick={() => sort("price", false)}>Highest price</button>
         </div>
         <div className="col">
-          <button onClick={sortHighestPrice}>Highest price</button>
+          {/* <button onClick={sortProductsAtoZ}>A-Z</button> */}
+          <button onClick={() => sort("name", true)}>A-Z</button>
         </div>
         <div className="col">
-          <button onClick={sortLowestPrice}>Lowest price</button>
+          {/* <button onClick={sortProductsZtoA}>Z-A</button> */}
+          <button onClick={() => sort("name", false)}>Z-A</button>
         </div>
+
         <div className="col">
           <span>{products.length} items</span>
         </div>

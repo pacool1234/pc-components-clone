@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import Header from "../Header/Header";
 import { UserContext } from "../../context/UserContext/UserState";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const { getUserInfo, user, token, logout } = useContext(UserContext);
@@ -11,9 +11,10 @@ const Profile = () => {
     getUserInfo();
     // console.log(user.name);
   }, []);
+  
   useEffect(() => {
     if (!token) {
-      navigate('/login')
+      navigate('/')
     }
   }, [token])
 

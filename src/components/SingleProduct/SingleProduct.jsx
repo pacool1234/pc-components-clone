@@ -1,14 +1,14 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import Header from "../Header/Header";
 import { ProductContext } from "../../context/ProductContext/ProductState";
 import "./Singleproduct.scss";
 import { useParams } from "react-router-dom";
 
 const SingleProduct = () => {
-  const { products, getSingleProduct } = useContext(ProductContext);
+  const { products, getSingleProduct, addCart } = useContext(ProductContext);
   const API_URL = "http://localhost:3000/";
-
   const { id } = useParams();
+  let productsToShow = []
 
   useEffect(() => {
     getSingleProduct(id);
@@ -32,12 +32,26 @@ const SingleProduct = () => {
                 <h6 className="singleProductName">{product.name}</h6>
               </div>
               <div className="priceBlock">
-                <div className="priceDiv">
-                  <p className="productPrice">{product.price} €</p>
+                <div className="dicountPriceDiv">
+                  <p className="discountProductPrice">
+                    {product.price * (1 - product.discount / 100)} €
+                  </p>
                 </div>
-                <div className="discountDiv">
-                  <p className="productPrice">{product.price} €</p>
-                </div>
+                {product.discount !== 0 && (
+                  <>
+                    <div className="originalPriceDiv">
+                      <p className="pvp">PVP</p>
+                      <p className="originalProductPrice">{product.price} €</p>
+                    </div>
+                    <div className="discountDiv">
+                      <p className="discountTitle">DISCOUNT</p>
+                      <p className="discount">-{product.discount}%</p>
+                    </div>
+                  </>
+                )}
+              </div>
+              <div className="purchaseBlock">
+                <button onClick={() => addCart(product)}>Add to Cart</button>
               </div>
             </div>
           </section>

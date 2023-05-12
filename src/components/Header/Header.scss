@@ -22,3 +22,17 @@
   /* margin-bottom: 0 !important; */
   width: 100%;
 }
+
+.badge {
+  padding: 0 3px;
+  background-color: red;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 4px;
+  position: relative;
+  top: -13px;
+  right: 5px;
+  width: fit-content;
+}
