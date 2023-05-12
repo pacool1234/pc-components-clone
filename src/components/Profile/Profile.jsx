@@ -9,7 +9,6 @@ const Profile = () => {
 
   useEffect(() => {
     getUserInfo();
-    // console.log(user.name);
   }, []);
   
   useEffect(() => {

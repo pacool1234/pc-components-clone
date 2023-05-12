@@ -44,19 +44,18 @@ const products = (state, action) => {
         };
       } else {
         action.payload["amount"] = 1;
-        console.log(action.payload);
         return {
           ...state,
           cart: [...state.cart, action.payload],
           totalItems: state.cart.reduce((total, obj) => total + obj.amount, 0),
         };
       }
-      case "CLEAR_CART":
-        return {
-          ...state,
-          cart: [],
-          totalItems: 0,
-        }
+    case "CLEAR_CART":
+      return {
+        ...state,
+        cart: [],
+        totalItems: 0,
+      };
     default:
       return state;
   }

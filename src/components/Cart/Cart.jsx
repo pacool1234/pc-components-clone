@@ -3,10 +3,12 @@ import Header from "../Header/Header";
 import "./Cart.scss";
 import { UserContext } from "../../context/UserContext/UserState";
 import { ProductContext } from "../../context/ProductContext/ProductState";
+import { OrderContext } from "../../context/OrderContext/OrderState";
 import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const { token } = useContext(UserContext);
+  const { createOrder } = useContext(OrderContext);
   const { cart, clearCart } = useContext(ProductContext);
   const navigate = useNavigate();
   const API_URL = "http://localhost:3000/";
@@ -46,11 +48,15 @@ const Cart = () => {
     <>
       <Header />
       <div className="mainCartDiv">
-        {cart ? (
-          <div className="products">{productsDiv}</div>
+        {cart.length !== 0 ? (
+          <>
+            <div className="products">{productsDiv}</div>
+            <button onClick={() => clearCart()}>Clear cart</button>
+            <button onClick={() => createOrder(cart)}>Order</button>
+          </>
         ) : (
           <>
-            <img src="../src/images/lens.svg" alt="" />
+            <img src="../src/images/lens.svg" />
             <h3>Your cart is empty</h3>
             <p>
               Explore a multitude of items at great prices from our home page
@@ -58,7 +64,7 @@ const Cart = () => {
           </>
         )}
       </div>
-      <button onClick={() => clearCart()}>Clear cart</button>
+      
     </>
   );
 };

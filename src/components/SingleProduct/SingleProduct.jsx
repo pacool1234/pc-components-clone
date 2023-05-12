@@ -16,7 +16,6 @@ const SingleProduct = () => {
   
   // DEBUG
   useEffect(() => {
-    console.log('cart modified!!!!');
   }, [cart]);
 
   const productsContainer = products.map((product) => {

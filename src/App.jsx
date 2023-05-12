@@ -10,6 +10,7 @@ import Login from './components/Login/Login';
 import { ProductProvider } from './context/ProductContext/ProductState';
 import { UserProvider } from './context/UserContext/UserState';
 import { CategoryProvider } from './context/CategoryContext/CategoryState';
+import { OrderProvider } from './context/OrderContext/OrderState';
 
 function App() {
 
@@ -19,16 +20,18 @@ function App() {
         <ProductProvider>
           <UserProvider>
             <CategoryProvider>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/products/:id" element={<Products />} />
-                <Route path="/single/:id" element={<SingleProduct />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/cart" element={<Cart />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-              </Routes>
+              <OrderProvider>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/products/:id" element={<Products />} />
+                  <Route path="/single/:id" element={<SingleProduct />} />
+                  <Route path="/register" element={<Register />} />
+                  <Route path="/profile" element={<Profile />} />
+                  <Route path="/cart" element={<Cart />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/register" element={<Register />} />
+                </Routes>
+              </OrderProvider>
             </CategoryProvider>
           </UserProvider>
         </ProductProvider>

@@ -1,6 +1,8 @@
 import React, { createContext, useReducer } from "react";
-import AppReducer from "./ProductReducer";
+import ProductReducer from "./ProductReducer";
 import axios from "axios";
+
+const API_URL = "http://localhost:3000/";
 
 const cart = JSON.parse(localStorage.getItem("cart")) || [];
 const totalItems = cart.reduce((total, obj) => total + obj.amount, 0);
@@ -14,10 +16,10 @@ const initialState = {
 export const ProductContext = createContext(initialState);
 
 export const ProductProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(AppReducer, initialState);
+  const [state, dispatch] = useReducer(ProductReducer, initialState);
 
   const getProducts = async (id) => {
-    const res = await axios.get("http://localhost:3000/products/getAll");
+    const res = await axios.get(API_URL + "products/getAll");
     const productsFiltered = res.data.filter(
       (product) => product.Category.id == id
     );
@@ -38,7 +40,7 @@ export const ProductProvider = ({ children }) => {
   };
 
   const getSingleProduct = async (id) => {
-    const res = await axios.get("http://localhost:3000/products/getAll");
+    const res = await axios.get(API_URL + "products/getAll");
     const productsFiltered = res.data.filter((product) => product.id == id);
     dispatch({
       type: "GET_PRODUCTS",
