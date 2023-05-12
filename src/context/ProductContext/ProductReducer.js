@@ -5,58 +5,16 @@ const products = (state, action) => {
         ...state,
         products: action.payload,
       };
-    case "SORT_PRODUCTS_A_TO_Z":
-      const sortedProductsAtoZ = state.products.sort(function (a, b) {
-        const keyA = a.name;
-        const keyB = b.name;
-        if (keyA < keyB) return -1;
-        if (keyA > keyB) return 1;
-        return 0;
-      });
-      return {
-        ...state,
-        products: sortedProductsAtoZ,
-      };
-    case "SORT_PRODUCTS_Z_TO_A":
-      const sortedProductsZtoA = state.products.sort(function (a, b) {
-        const keyA = a.name;
-        const keyB = b.name;
-        if (keyA < keyB) return 1;
-        if (keyA > keyB) return -1;
-        return 0;
-      });
-      return {
-        ...state,
-        products: sortedProductsZtoA,
-      };
-    case "SORT_HIGHEST_PRICE":
-      const sortedHighestPrice = state.products.sort(function (a, b) {
-        const keyA = +a.price;
-        const keyB = +b.price;
-        if (keyA < keyB) return 1;
-        if (keyA > keyB) return -1;
-        return 0;
-      });
-      return {
-        ...state,
-        products: sortedHighestPrice,
-      };
-    case "SORT_LOWEST_PRICE":
-      const sortedLowestPrice = state.products.sort(function (a, b) {
-        const keyA = +a.price;
-        const keyB = +b.price;
-        if (keyA < keyB) return -1;
-        if (keyA > keyB) return 1;
-        return 0;
-      });
-      return {
-        ...state,
-        products: sortedLowestPrice,
-      };
     case "SORT":
       const sorted = state.products.sort(function (a, b) {
-        const keyA = +a[action.payload.property];
-        const keyB = +b[action.payload.property];
+        let keyA, keyB;
+        if (action.payload.property == "name") {
+          keyA = a[action.payload.property];
+          keyB = b[action.payload.property];
+        } else {
+          keyA = +a[action.payload.property];
+          keyB = +b[action.payload.property];
+        }
         if (action.payload.isAsc) {
           return keyA < keyB ? -1 : 1;
         } else {
@@ -69,18 +27,28 @@ const products = (state, action) => {
       };
     case "ADD_CART":
       const cartFromLS = JSON.parse(localStorage.getItem("cart"));
-      const productAlreadyPresent = cartFromLS.some(item => item.name == action.payload["name"]);
+      const productAlreadyPresent = cartFromLS.some(
+        (item) => item.name == action.payload["name"]
+      );
       if (productAlreadyPresent) {
-        action.payload["amount"] ++
+        state.cart = state.cart.map(item => {
+          if (item.name == action.payload["name"]) {
+            item.amount ++
+          }
+          return item
+        })
         return {
           ...state,
           cart: [...state.cart],
+          totalItems: state.cart.reduce((total, obj) => total + obj.amount, 0)
         };
       } else {
-        action.payload["amount"] = 1
+        action.payload["amount"] = 1;
+        console.log(action.payload);
         return {
           ...state,
           cart: [...state.cart, action.payload],
+          totalItems: state.cart.reduce((total, obj) => total + obj.amount, 0)
         };
       }
     default:

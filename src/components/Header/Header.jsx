@@ -11,6 +11,7 @@ const Header = () => {
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
     console.log("total in Header", totalItems);
+    console.log(cart);
   }, [cart])
 
   return (
@@ -32,6 +33,7 @@ const Header = () => {
           <span className="col">
             <Link to="/cart">
               <span className="material-icons">shopping_cart</span>
+              {/* {token && <span className="badge">{cart.length}</span>} */}
               {token && <span className="badge">{totalItems}</span>}
             </Link>
           </span>

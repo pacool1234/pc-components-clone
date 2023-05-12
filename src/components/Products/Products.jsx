@@ -8,10 +8,6 @@ const Products = () => {
   const {
     products,
     getProducts,
-    sortProductsAtoZ,
-    sortProductsZtoA,
-    sortHighestPrice,
-    sortLowestPrice,
     sort,
   } = useContext(ProductContext);
 
@@ -49,19 +45,15 @@ const Products = () => {
       <h1>Main page displaying products</h1>
       <div className="filterContainer row">
         <div className="col">
-          {/* <button onClick={sortLowestPrice}>Lowest price</button> */}
-          <button onClick={() => sort("price", true)}>Lowest price</button>
+          <button onClick={() => sort("price", true)}>Lowest price OK</button>
         </div>
         <div className="col">
-          {/* <button onClick={sortHighestPrice}>Highest price</button> */}
-          <button onClick={() => sort("price", false)}>Highest price</button>
+          <button onClick={() => sort("price", false)}>Highest price OK</button>
         </div>
         <div className="col">
-          {/* <button onClick={sortProductsAtoZ}>A-Z</button> */}
           <button onClick={() => sort("name", true)}>A-Z</button>
         </div>
         <div className="col">
-          {/* <button onClick={sortProductsZtoA}>Z-A</button> */}
           <button onClick={() => sort("name", false)}>Z-A</button>
         </div>
 

@@ -5,7 +5,7 @@ import "./Singleproduct.scss";
 import { useParams } from "react-router-dom";
 
 const SingleProduct = () => {
-  const { products, getSingleProduct, addCart } = useContext(ProductContext);
+  const { products, getSingleProduct, addCart, cart } = useContext(ProductContext);
   const API_URL = "http://localhost:3000/";
   const { id } = useParams();
   let productsToShow = []
@@ -13,10 +13,15 @@ const SingleProduct = () => {
   useEffect(() => {
     getSingleProduct(id);
   }, []);
+  
+  // DEBUG
+  useEffect(() => {
+    console.log('cart modified!!!!');
+  }, [cart]);
 
   const productsContainer = products.map((product) => {
     return (
-      <>
+      <div key={product.id}>
         <main className="mainProduct">
           <section className="imgSection">
             <div className="singleImgDiv">
@@ -34,7 +39,7 @@ const SingleProduct = () => {
               <div className="priceBlock">
                 <div className="dicountPriceDiv">
                   <p className="discountProductPrice">
-                    {product.price * (1 - product.discount / 100)} €
+                    {(product.price * (1 - product.discount / 100)).toFixed(2)} €
                   </p>
                 </div>
                 {product.discount !== 0 && (
@@ -56,7 +61,7 @@ const SingleProduct = () => {
             </div>
           </section>
         </main>
-      </>
+      </div>
     );
   });
 
