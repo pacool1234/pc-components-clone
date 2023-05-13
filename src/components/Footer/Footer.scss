@@ -1,0 +1,51 @@
+.promoBlock {
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  background-color: #f2f2f2;
+  height: 180px;
+  padding: 0 5%;
+}
+
+.promo {
+  width: 33%;
+  display: flex;
+  justify-content: center;
+  padding: 0 5%;
+  img {
+    padding-right: 8%;
+  }
+}
+
+.promoMiddle {
+  border-left: 1px solid darkgray;
+  border-right: 1px solid darkgray;
+}
+
+.promoTextDiv {
+  display: flex;
+  align-items: center;
+}
+
+.infoBlock {
+  height: 150px;
+}
+
+.blankDiv {
+  height: 150px;
+}
+
+.copyright {
+  position: absolute;
+  bottom: 0;
+  padding-top: 20px;
+  width: 100%;
+  height: 80px;
+  border-top: 1px solid lightgray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  p {
+    font-size: 1rem;
+  }
+}

@@ -148,6 +148,13 @@ const Register = () => {
           </div>
         </section>
       </main>
+      <div className="copyright">
+        <p>
+          PC Components LLC TIN 275-234-098. 1600 Pennsylvania Avenue, NW
+          Washington, D.C. 20500 U.S.
+        </p>
+      </div>
+      <div className="blankDiv"></div>
     </>
   );
 };

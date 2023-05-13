@@ -1,41 +1,69 @@
 import React, { useContext, useEffect } from "react";
-import Header from "../Header/Header";
 import { UserContext } from "../../context/UserContext/UserState";
 import { useNavigate } from "react-router-dom";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
+import "./Profile.scss"
 
 const Profile = () => {
-  const { getUserInfo, user, token, logout } = useContext(UserContext);
-  const navigate = useNavigate()
+  const { getUserInfo, getOrders, orders, user, token, logout } =
+    useContext(UserContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getUserInfo();
+    getOrders();
   }, []);
-  
+
   useEffect(() => {
     if (!token) {
-      navigate('/')
+      navigate("/");
     }
-  }, [token])
+  }, [token]);
 
   if (!user) {
-    return 'loading'
+    return "loading";
   }
-
 
   return (
     <>
       <Header />
-      <h1>User Profile</h1>
-      <p>{user.name}</p>
-      <p>{user.email}</p>
-      <p>{user.role}</p>
-      <p>{user.address}</p>
-      <p>{user.creditCard}</p>
-      <p>{user.CVC}</p>
-      <p>{user.expiryDate}</p>
+      <main className="profileContainer">
+        <section className="userInfoSection">
+          <h1>User Profile</h1>
+          <p>{user.name}</p>
+          <p>{user.email}</p>
+          <p>{user.role}</p>
+          <p>{user.address}</p>
+        </section>
+        <section className="ordersHistory">
+          {orders.map((order) => {
+            return (
+              <>
+                <div key={order.id}>
+                  {order.Products.map((product) => {
+                    return (
+                      <div key={product.id}>
+                        <p>{product.name}</p>
+                        <p>{product.price}</p>
+                      </div>
+                    );
+                  })}
+                </div>
+                <hr />
+              </>
+            );
+          })}
+        </section>
+      </main>
+
+
       <span>
-        <button onClick={logout} className="btn btn-primary">Log out</button>
+        <button onClick={logout} className="btn btn-danger">
+          Log out
+        </button>
       </span>
+      <Footer />
     </>
   );
 };

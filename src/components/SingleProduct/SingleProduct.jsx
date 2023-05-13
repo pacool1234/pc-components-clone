@@ -3,16 +3,24 @@ import Header from "../Header/Header";
 import { ProductContext } from "../../context/ProductContext/ProductState";
 import "./Singleproduct.scss";
 import { useParams } from "react-router-dom";
+import Footer from "../Footer/Footer";
+import { UserContext } from "../../context/UserContext/UserState";
 
 const SingleProduct = () => {
-  const { products, getSingleProduct, addItem, cart } = useContext(ProductContext);
+  const { products, getSingleProduct, addItem } = useContext(ProductContext);
+  const { getUserInfo, user } = useContext(UserContext);
   const API_URL = "http://localhost:3000/";
   const { id } = useParams();
   let productsToShow = []
 
   useEffect(() => {
     getSingleProduct(id);
+    getUserInfo();
   }, []);
+
+  if (!user) {
+    return "loading";
+  }
 
   const productsContainer = products.map((product) => {
     return (
@@ -37,7 +45,7 @@ const SingleProduct = () => {
                     {(product.price * (1 - product.discount / 100)).toFixed(2)} €
                   </p>
                 </div>
-                {product.discount !== 0 && (
+                {product.discount !== null && (
                   <>
                     <div className="originalPriceDiv">
                       <p className="pvp">PVP</p>
@@ -65,6 +73,7 @@ const SingleProduct = () => {
       <Header />
       <h1>Main page displaying products</h1>
       <div className="picturesContainer">{productsContainer}</div>
+      <Footer />
     </>
   );
 };

@@ -5,12 +5,12 @@ import { UserContext } from "../../context/UserContext/UserState";
 import { ProductContext } from "../../context/ProductContext/ProductState";
 
 const Header = () => {
-  const { token, logout } = useContext(UserContext)
-  const { cart, totalItems } = useContext(ProductContext)
+  const { token, user } = useContext(UserContext);
+  const { cart, totalItems } = useContext(ProductContext);
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
-  }, [cart])
+  }, [cart]);
 
   return (
     <>
@@ -18,15 +18,20 @@ const Header = () => {
         <div className="row" id="navbarContainer">
           <span className="col">
             <Link to="/">
-              <img
-                src="../src/images/logo.png" 
-                width="69"
-                height="24"
-              />
+              <img src="../src/images/logo.png" width="69" height="24" />
             </Link>
           </span>
           <span className="col">
-            {token ? <Link to="/profile">My account</Link> : <Link to="/login">My account</Link> }
+            {token ? (
+                <Link to="/profile" className="userInfoBlock">
+                  <div className="initialLetterDiv">
+                    <p className="initialLetter">{user.name[0]}</p>
+                  </div>
+                  {user.email}
+                </Link>
+            ) : (
+              <Link to="/login">My account</Link>
+            )}
           </span>
           <span className="col">
             <Link to="/cart">

@@ -78,6 +78,7 @@ const products = (state, action) => {
 
     case "DELETE_ITEM":
       state.cart = state.cart.filter((item) => item.id !== action.payload["id"]);
+      state.totalPrice -= Number(action.payload["amount"]) * Number(action.payload["price"]) * (1 - Number(action.payload["discount"]) / 100);
       return {
         ...state,
         cart: [...state.cart],

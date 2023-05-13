@@ -12,6 +12,11 @@ const users = (state, action) => {
         ...state,
         user: action.payload
       };
+    case "GET_ORDERS":
+      return {
+        ...state,
+        orders: action.payload
+      };
     case "LOGOUT":
       return {
         ...state,

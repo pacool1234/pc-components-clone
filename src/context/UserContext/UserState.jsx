@@ -9,6 +9,7 @@ const initialState = {
   user: null,
   role: "",
   message: "",
+  orders: [],
 };
 
 const API_URL = "http://localhost:3000/";
@@ -42,6 +43,19 @@ export const UserProvider = ({ children }) => {
     });
   };
 
+  const getOrders = async () => {
+    const token = JSON.parse(localStorage.getItem("token"));
+    const res = await axios.get(API_URL + "orders/getAll", {
+      headers: {
+        Authorization: token,
+      },
+    });
+    dispatch({
+      type: "GET_ORDERS",
+      payload: res.data,
+    });
+  };
+
   const logout = async () => {
     const token = JSON.parse(localStorage.getItem("token"));
     const res = await axios.delete(API_URL + "users/logout", {
@@ -52,7 +66,7 @@ export const UserProvider = ({ children }) => {
     dispatch({
       type: "LOGOUT",
       payload: res.data,
-    })
+    });
     if (res.data) {
       localStorage.removeItem("token");
     }
@@ -65,9 +79,11 @@ export const UserProvider = ({ children }) => {
         user: state.user,
         message: state.message,
         role: state.role,
+        orders: state.orders,
         login,
         getUserInfo,
-        logout
+        getOrders,
+        logout,
       }}
     >
       {children}

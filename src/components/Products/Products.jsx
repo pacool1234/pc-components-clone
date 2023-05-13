@@ -1,8 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 import { ProductContext } from "../../context/ProductContext/ProductState";
 import "./Products.scss";
 import { useParams, useNavigate } from "react-router-dom";
+import { UserContext } from "../../context/UserContext/UserState";
 
 const Products = () => {
   const {
@@ -11,13 +13,20 @@ const Products = () => {
     sort,
   } = useContext(ProductContext);
 
+  const { getUserInfo, user } = useContext(UserContext)
+
   const API_URL = "http://localhost:3000/";
   const navigate = useNavigate();
   const { id } = useParams();
 
   useEffect(() => {
     getProducts(id);
+    getUserInfo();
   }, []);
+
+  if (!user) {
+    return "loading";
+  }
 
   const productsContainer = products.map((product) => {
     return (
@@ -34,7 +43,25 @@ const Products = () => {
           width={150}
         />
         <p>{product.name}</p>
-        <p>{product.price} €</p>
+        <div className="priceBlock">
+                <div className="dicountPriceDiv">
+                  <p className="discountProductPrice">
+                    {(product.price * (1 - product.discount / 100)).toFixed(2)} €
+                  </p>
+                </div>
+                {product.discount !== null && (
+                  <>
+                    <div className="originalPriceDiv">
+                      <p className="pvp">PVP</p>
+                      <p className="originalProductPrice">{product.price} €</p>
+                    </div>
+                    <div className="discountDiv">
+                      <p className="discountTitle">DISCOUNT</p>
+                      <p className="discount">-{product.discount}%</p>
+                    </div>
+                  </>
+                )}
+              </div>
       </div>
     );
   });
@@ -58,10 +85,11 @@ const Products = () => {
         </div>
 
         <div className="col">
-          <span>{products.length} items</span>
+          <span className="itemCounter">{products.length} items</span>
         </div>
       </div>
       <div className="picturesContainer">{productsContainer}</div>
+      <Footer />
     </>
   );
 };

@@ -9,7 +9,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 2rem;
+  height: 3rem;
 }
 
 #navbarContainer > span {
@@ -35,4 +35,27 @@
   top: -13px;
   right: 5px;
   width: fit-content;
+}
+
+.userInfoBlock {
+  display: flex;
+  justify-content: center;
+}
+
+.userInfoBlock:hover {
+  background-color: lightgray;
+}
+
+.initialLetterDiv {
+  background-color: purple;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  margin-right: 0.4rem;
+}
+
+.initialLetter {
+  color: white;
+  font-weight: 800;
+  text-decoration: none;
 }

@@ -3,11 +3,23 @@ import Header from "../Header/Header";
 import { CategoryContext } from "../../context/CategoryContext/CategoryState";
 import { useNavigate } from "react-router-dom";
 import "./Home.scss";
+import Footer from "../Footer/Footer";
+import { UserContext } from "../../context/UserContext/UserState";
 
 const Home = () => {
   const { categories, getCategories } = useContext(CategoryContext);
+  const { user, getUserInfo } = useContext(UserContext);
   const API_URL = "http://localhost:3000/";
   const navigate = useNavigate();
+
+  useEffect(() => {
+    getUserInfo();
+    getCategories();
+  }, [])
+
+  if (!user) {
+    return "loading";
+  }
 
   const categoriesDiv = categories.map((category) => {
     return (
@@ -26,10 +38,6 @@ const Home = () => {
     );
   });
 
-  useEffect(() => {
-    getCategories();
-  }, []);
-
   return (
     <>
       <Header />
@@ -37,6 +45,7 @@ const Home = () => {
         <img src="../src/images/orange_days.png" className="orangeImg"/>
         <div className="categories">{categoriesDiv}</div>
       </div>
+      <Footer />
     </>
   );
 };

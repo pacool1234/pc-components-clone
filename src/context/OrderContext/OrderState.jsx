@@ -24,10 +24,8 @@ export const OrderProvider = ({ children }) => {
           },
         }
       );
-      console.log("ORDER CREATEEEEEEEEED");
     } catch (error) {
-      console.error("create order error", error);
-      console.log("create order res", res);
+      console.error(error);
     }
   };
 
