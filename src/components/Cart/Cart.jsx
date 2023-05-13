@@ -37,7 +37,6 @@ const Cart = () => {
     return "loading";
   }
 
-  // const
   const itemsDiv = cart.map((product) => {
     return (
       <div key={product.id} width={200} height={250} className="itemDiv">
@@ -54,7 +53,7 @@ const Cart = () => {
                 {(product.price * (1 - product.discount / 100)).toFixed(2)} €
               </p>
             </div>
-            {product.discount !== null && (
+            {product.discount !== 0 && (
               <>
                 <div className="originalPriceDiv">
                   <p className="pvp">PVP</p>

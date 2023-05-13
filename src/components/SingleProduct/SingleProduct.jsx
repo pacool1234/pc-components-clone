@@ -45,7 +45,7 @@ const SingleProduct = () => {
                     {(product.price * (1 - product.discount / 100)).toFixed(2)} €
                   </p>
                 </div>
-                {product.discount !== null && (
+                {product.discount !== 0 && (
                   <>
                     <div className="originalPriceDiv">
                       <p className="pvp">PVP</p>
