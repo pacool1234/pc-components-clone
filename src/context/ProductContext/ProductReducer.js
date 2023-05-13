@@ -30,14 +30,15 @@ const products = (state, action) => {
     case "ADD_ITEM":
       const cartFromLS = JSON.parse(localStorage.getItem("cart"));
       const productAlreadyPresent = cartFromLS.some(
-        (item) => item.name == action.payload["name"]
+        (item) => item.id == action.payload["id"]
       );
       if (productAlreadyPresent) {
         state.cart = state.cart.map((item) => {
-          if (item.name == action.payload["name"]) {
+          if (item.id == action.payload["id"]) {
             item.amount++;
-            // state.totalPrice += Number(action.payload["price"])
-            state.totalPrice += Number(action.payload["price"]) * (1 - Number(action.payload["discount"]) / 100)
+            state.totalPrice +=
+              Number(action.payload["price"]) *
+              (1 - Number(action.payload["discount"]) / 100);
           }
           return item;
         });
@@ -57,17 +58,26 @@ const products = (state, action) => {
 
     case "SUBTRACT_ITEM":
       state.cart = state.cart.map((item) => {
-        if (item.name == action.payload["name"]) {
+        if (item.id == action.payload["id"]) {
           if (item.amount > 1) {
             item.amount--;
-            // state.totalPrice -= Number(action.payload["price"])
-            state.totalPrice -= Number(action.payload["price"]) * (1 - Number(action.payload["discount"]) / 100)
+            state.totalPrice -=
+              Number(action.payload["price"]) *
+              (1 - Number(action.payload["discount"]) / 100);
           } else {
             item.amount = 1;
           }
         }
         return item;
       });
+      return {
+        ...state,
+        cart: [...state.cart],
+        totalItems: state.cart.reduce((total, obj) => total + obj.amount, 0),
+      };
+
+    case "DELETE_ITEM":
+      state.cart = state.cart.filter((item) => item.id !== action.payload["id"]);
       return {
         ...state,
         cart: [...state.cart],

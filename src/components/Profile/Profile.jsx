@@ -29,6 +29,10 @@ const Profile = () => {
       <p>{user.name}</p>
       <p>{user.email}</p>
       <p>{user.role}</p>
+      <p>{user.address}</p>
+      <p>{user.creditCard}</p>
+      <p>{user.CVC}</p>
+      <p>{user.expiryDate}</p>
       <span>
         <button onClick={logout} className="btn btn-primary">Log out</button>
       </span>

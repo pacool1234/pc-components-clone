@@ -32,6 +32,7 @@ const Login = () => {
       email: "",
       password: "",
     });
+    // SOFIA: always displays "Incorrect email/password"!!!!
     if (token) {
       toastRef.current.innerHTML = "You have successfully logged in";
     } else {
