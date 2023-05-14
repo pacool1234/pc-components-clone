@@ -17,9 +17,9 @@ const Home = () => {
     getCategories();
   }, [])
 
-  if (!user) {
-    return "loading";
-  }
+  setTimeout(() => {
+    console.log("waiting");
+  }, 1000);
 
   const categoriesDiv = categories.map((category) => {
     return (

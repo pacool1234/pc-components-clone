@@ -1,6 +1,16 @@
+.ordersHistoryTitle {
+  margin-top: 90px;
+  display: flex;
+  align-items: center;
+  #blank {
+    width: 27%;
+  }
+
+}
+
 .profileContainer {
   display: flex;
-  margin-top: 100px;
+  margin-top: 30px;
   .userInfoSection {
     width: 25%;
   }
@@ -12,7 +22,7 @@
 .singleOrder {
   border: 1px solid lightgray;
   border-radius: 8px;
-  margin: 2%;
+  margin: 0 2% 2% 2%;
 }
 
 .orderHeader {
@@ -38,8 +48,20 @@
 
 .purchasedItemDiv {
   display: flex;
-}
-
-#productName {
-  font-size: 0.8rem;
+  margin: 3% 6%;
+  .leftPurchasedItemSubDiv {
+    margin-right: 5%;
+    width: 15%;
+  }
+  .rightPurchasedItemSubDiv {
+    width: 55%;
+    #productName {
+      font-size: 1rem;
+      text-align: left;
+    }
+    .discountPriceDiv {
+      display: flex;
+      align-items: center;
+    }
+  }
 }

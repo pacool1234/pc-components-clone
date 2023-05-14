@@ -56,9 +56,10 @@ const Profile = () => {
             </div>
           </div>
         </div>
-        <hr style={{"width":"95%", "text-align":"center", "margin":"0 auto"}}/>
+        <hr style={{"width":"97%", "textAlign":"center", "margin":"0 auto"}}/>
         {order.Products.map((product) => {
           return (
+            <>
             <div key={product.id} width={200} height={250} className="purchasedItemDiv">
               <div className="leftPurchasedItemSubDiv">
                 <img
@@ -93,8 +94,16 @@ const Profile = () => {
                     </>
                   )}
                 </div>
+                <div className="amountPurchasedDiv">
+                  <p>{product.amount} unit(s)</p>
+                </div>
+              </div>
+              <div className="starsItemSubDiv">
+                <p>STARS</p>
               </div>
             </div>
+          <hr style={{"width":"90%", "textAlign":"center", "margin":"0 auto"}}/>
+          </>
           );
         })}
       </div>
@@ -104,21 +113,30 @@ const Profile = () => {
   return (
     <>
       <Header />
+      <div className="ordersHistoryTitle">
+        <h2 id="blank" style={{color:"white"}}>.</h2>
+        <h2>Orders History</h2>
+      </div>
       <main className="profileContainer">
         <section className="userInfoSection">
-          <h1>User Profile</h1>
+          <h3>{user.name} {user.surname}</h3>
           <p>{user.name}</p>
           <p>{user.email}</p>
           <p>{user.role}</p>
           <p>{user.address}</p>
-          <hr />
+          <hr style={{"width":"90%", "textAlign":"center", "margin":"5% auto"}} />
           <span>
             <button onClick={logout} className="btn btn-danger">
               Log out
             </button>
           </span>
         </section>
-        <section className="ordersHistory">{allOrders}</section>
+        <section className="ordersHistory">
+          {/* <div className="ordersHistoryTitle">
+            <h2>Orders History</h2>
+          </div> */}
+          {allOrders}
+        </section>
       </main>
 
       <Footer />

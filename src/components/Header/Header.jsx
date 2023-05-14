@@ -23,14 +23,14 @@ const Header = () => {
           </span>
           <span className="col">
             {token ? (
-                <Link to="/profile" className="userInfoBlock">
+                <Link to="/profile" className="userInfoBlock" style={{textDecoration: "none", color:"gray"}}>
                   <div className="initialLetterDiv">
                     <p className="initialLetter">{user.name[0]}</p>
                   </div>
                   {user.email}
                 </Link>
             ) : (
-              <Link to="/login">My account</Link>
+              <Link to="/login" style={{textDecoration: "none", color:"gray"}}>My account</Link>
             )}
           </span>
           <span className="col">
