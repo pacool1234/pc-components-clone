@@ -36,9 +36,9 @@ const products = (state, action) => {
         state.cart = state.cart.map((item) => {
           if (item.id == action.payload["id"]) {
             item.amount++;
-            state.totalPrice +=
-              Number(action.payload["price"]) *
-              (1 - Number(action.payload["discount"]) / 100);
+            // state.totalPrice +=
+            //   Number(action.payload["price"]) *
+            //   (1 - Number(action.payload["discount"]) / 100);
           }
           return item;
         });
@@ -46,13 +46,17 @@ const products = (state, action) => {
           ...state,
           cart: [...state.cart],
           totalItems: state.cart.reduce((total, obj) => total + obj.amount, 0),
+          totalPrice: state.cart.reduce((total, obj) => total + Number(obj.amount) * Number(obj.price) * (1 - Number(obj.discount) / 100), 0)
         };
       } else {
         action.payload["amount"] = 1;
+        const newCart = [...state.cart, action.payload];
+        console.log("newCart", newCart);
         return {
           ...state,
-          cart: [...state.cart, action.payload],
-          totalItems: state.cart.reduce((total, obj) => total + obj.amount, 0),
+          cart: newCart,
+          totalItems: newCart.reduce((total, obj) => total + obj.amount, 0),
+          totalPrice: newCart.reduce((total, obj) => total + Number(obj.amount) * Number(obj.price) * (1 - Number(obj.discount) / 100), 0)
         };
       }
 
@@ -61,9 +65,9 @@ const products = (state, action) => {
         if (item.id == action.payload["id"]) {
           if (item.amount > 1) {
             item.amount--;
-            state.totalPrice -=
-              Number(action.payload["price"]) *
-              (1 - Number(action.payload["discount"]) / 100);
+            // state.totalPrice -=
+            //   Number(action.payload["price"]) *
+            //   (1 - Number(action.payload["discount"]) / 100);
           } else {
             item.amount = 1;
           }
@@ -74,6 +78,7 @@ const products = (state, action) => {
         ...state,
         cart: [...state.cart],
         totalItems: state.cart.reduce((total, obj) => total + obj.amount, 0),
+        totalPrice: state.cart.reduce((total, obj) => total + Number(obj.amount) * Number(obj.price) * (1 - Number(obj.discount) / 100), 0)
       };
 
     case "DELETE_ITEM":
@@ -90,6 +95,7 @@ const products = (state, action) => {
         ...state,
         cart: [],
         totalItems: 0,
+        totalPrice: 0,
       };
     default:
       return state;

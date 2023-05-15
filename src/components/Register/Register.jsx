@@ -6,24 +6,46 @@ import { UserContext } from "../../context/UserContext/UserState";
 
 const Register = () => {
   const { message, role } = useContext(UserContext);
-  const [validationMsg, setValidationMsg] = useState("");
+  const [nameValidationMsg, setNameValidationMsg] = useState("");
+  const [passwordValidationMsg, setPasswordValidationMsg] = useState("");
+  const [password2ValidationMsg, setPassword2ValidationMsg] = useState("");
   const [data, setData] = useState({
     name: "",
+    surname: "",
     email: "",
+    password: "",
+    password2: "",
   });
   const [btnDisabled, setBtnDisabled] = useState(true);
   const [showToast, setShowToast] = useState(false);
   let navigate = useNavigate();
 
   const nameRef = useRef(null);
+  const surnameRef = useRef(null);
   const emailRef = useRef(null);
+  const passwordRef = useRef(null);
+  const password2Ref = useRef(null);
 
   const handleInputChange = (event) => {
     if (data.name.length + 1 < 3) {
-      setValidationMsg("Name must be at least 3 characters");
+      setNameValidationMsg("Name must be at least 3 characters");
       setBtnDisabled(true);
     } else {
-      setValidationMsg(null);
+      setNameValidationMsg(null);
+    }
+    if (data.password.length + 1 < 8) {
+      setPasswordValidationMsg("Password must be at least 8 characters");
+      setBtnDisabled(true);
+    } else {
+      setPasswordValidationMsg(null);
+    }
+    // if (data.password.length + 1 < 8) {
+    //   setPasswordValidationMsg("Password must be at least 8 characters");
+    //   setBtnDisabled(true);
+    // } else {
+    //   setPasswordValidationMsg(null);
+    // }
+    if (data.name.length + 1 >= 3 && data.password.length + 1 >= 8) {
       setBtnDisabled(false);
     }
     setData({
@@ -94,20 +116,48 @@ const Register = () => {
             <div ref={nameRef} className="form-group">
               <input
                 type="text"
-                placeholder="name"
+                placeholder="Name"
                 value={data.name}
                 onChange={handleInputChange}
                 name="name"
               />
             </div>
-            <span>{validationMsg}</span>
+            <span>{nameValidationMsg}</span>
+            <div ref={surnameRef} className="form-group">
+              <input
+                type="text"
+                placeholder="Surname"
+                value={data.surname}
+                onChange={handleInputChange}
+                name="surname"
+              />
+            </div>
             <div ref={emailRef} className="form-group">
               <input
                 type="email"
-                placeholder="email"
+                placeholder="Email address"
                 value={data.email}
                 onChange={handleInputChange}
                 name="email"
+              />
+            </div>
+            <div ref={passwordRef} className="form-group">
+              <input
+                type="password"
+                placeholder="Password"
+                value={data.password}
+                onChange={handleInputChange}
+                name="password"
+              />
+            </div>
+            <span>{passwordValidationMsg}</span>
+            <div ref={password2Ref} className="form-group">
+              <input
+                type="password"
+                placeholder="Confirm your password"
+                value={data.password2}
+                onChange={handleInputChange}
+                name="password2"
               />
             </div>
             <button type="submit" disabled={btnDisabled}>

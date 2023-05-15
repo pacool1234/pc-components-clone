@@ -8,9 +8,15 @@
   color: gray;
 }
 
-.picturesContainer {
+.productsContainer {
   display: flex;
+  justify-content: left;
   flex-wrap: wrap;
+  padding: 2% 5%;
+  .productDiv {
+    width: 25%;
+    padding: 2%;
+  }
 }
 
 .productDiv:hover {

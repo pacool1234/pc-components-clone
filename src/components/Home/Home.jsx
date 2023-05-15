@@ -8,12 +8,10 @@ import { UserContext } from "../../context/UserContext/UserState";
 
 const Home = () => {
   const { categories, getCategories } = useContext(CategoryContext);
-  const { user, getUserInfo } = useContext(UserContext);
   const API_URL = "http://localhost:3000/";
   const navigate = useNavigate();
 
   useEffect(() => {
-    getUserInfo();
     getCategories();
   }, [])
 

@@ -5,11 +5,12 @@ import { UserContext } from "../../context/UserContext/UserState";
 import { ProductContext } from "../../context/ProductContext/ProductState";
 
 const Header = () => {
-  const { token, user } = useContext(UserContext);
+  const { token, user, getUserInfo } = useContext(UserContext);
   const { cart, totalItems } = useContext(ProductContext);
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
+    getUserInfo();
   }, [cart]);
 
   return (
@@ -22,7 +23,7 @@ const Header = () => {
             </Link>
           </span>
           <span className="col">
-            {token ? (
+            {user ? (
                 <Link to="/profile" className="userInfoBlock" style={{textDecoration: "none", color:"gray"}}>
                   <div className="initialLetterDiv">
                     <p className="initialLetter">{user.name[0]}</p>

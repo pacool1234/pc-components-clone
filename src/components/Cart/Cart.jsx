@@ -1,4 +1,4 @@
-import Reac, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Header from "../Header/Header";
 import "./Cart.scss";
 import { UserContext } from "../../context/UserContext/UserState";
@@ -18,8 +18,8 @@ const Cart = () => {
     totalItems,
     totalPrice,
   } = useContext(ProductContext);
-  const [showToast, setShowToast] = useState(false);
 
+  const [showToast, setShowToast] = useState(false);
   const navigate = useNavigate();
   const API_URL = "http://localhost:3000/";
 

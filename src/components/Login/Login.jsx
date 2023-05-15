@@ -33,12 +33,15 @@ const Login = () => {
       password: "",
     });
     // SOFIA: always displays "Incorrect email/password"!!!!
-    if (token) {
-      toastRef.current.innerHTML = "You have successfully logged in";
-    } else {
+    if (token.length <= 0) {
       toastRef.current.innerHTML = "Incorrect email/password";
+      console.log(token.length > 0);
+      setShowToast(true);
+      setTimeout(() => {
+        setShowToast(false);
+      }, 1500);
     }
-    setShowToast(true);
+    
   };
 
   useEffect(() => {
@@ -47,6 +50,11 @@ const Login = () => {
         navigate("/profile");
       }, 2500);
     }
+    if (token.length > 0) {
+      toastRef.current.innerHTML = "You have successfully logged in";
+      setShowToast(true);
+    } 
+
   }, [token]);
 
   return (

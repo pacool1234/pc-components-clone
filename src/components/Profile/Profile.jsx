@@ -120,7 +120,6 @@ const Profile = () => {
       <main className="profileContainer">
         <section className="userInfoSection">
           <h3>{user.name} {user.surname}</h3>
-          <p>{user.name}</p>
           <p>{user.email}</p>
           <p>{user.role}</p>
           <p>{user.address}</p>
@@ -132,9 +131,6 @@ const Profile = () => {
           </span>
         </section>
         <section className="ordersHistory">
-          {/* <div className="ordersHistoryTitle">
-            <h2>Orders History</h2>
-          </div> */}
           {allOrders}
         </section>
       </main>

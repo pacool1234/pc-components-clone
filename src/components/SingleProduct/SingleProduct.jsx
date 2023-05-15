@@ -7,20 +7,13 @@ import Footer from "../Footer/Footer";
 import { UserContext } from "../../context/UserContext/UserState";
 
 const SingleProduct = () => {
-  const { products, getSingleProduct, addItem } = useContext(ProductContext);
-  const { getUserInfo, user } = useContext(UserContext);
+  const { products, getSingleProduct, addItem, totalItems, totalPrice } = useContext(ProductContext);
   const API_URL = "http://localhost:3000/";
   const { id } = useParams();
-  let productsToShow = []
 
   useEffect(() => {
     getSingleProduct(id);
-    getUserInfo();
   }, []);
-
-  if (!user) {
-    return "loading";
-  }
 
   const productsContainer = products.map((product) => {
     return (

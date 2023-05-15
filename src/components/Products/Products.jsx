@@ -13,20 +13,13 @@ const Products = () => {
     sort,
   } = useContext(ProductContext);
 
-  const { getUserInfo, user } = useContext(UserContext)
-
   const API_URL = "http://localhost:3000/";
   const navigate = useNavigate();
   const { id } = useParams();
 
   useEffect(() => {
     getProducts(id);
-    getUserInfo();
   }, []);
-
-  if (!user) {
-    return "loading";
-  }
 
   const productsContainer = products.map((product) => {
     return (
@@ -83,12 +76,12 @@ const Products = () => {
         <div className="col">
           <button onClick={() => sort("name", false)}>Z-A</button>
         </div>
-
         <div className="col">
           <span className="itemCounter">{products.length} items</span>
         </div>
       </div>
-      <div className="picturesContainer">{productsContainer}</div>
+      <hr style={{"width":"92%", "textAlign":"center", "margin":"0 auto"}}/>
+      <div className="productsContainer">{productsContainer}</div>
       <Footer />
     </>
   );
