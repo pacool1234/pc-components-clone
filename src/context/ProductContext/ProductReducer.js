@@ -74,7 +74,6 @@ const products = (state, action) => {
       } else {
         action.payload["amount"] = 1;
         const newCart = [...state.cart, action.payload];
-        console.log("newCart", newCart);
         return {
           ...state,
           cart: newCart,

@@ -30,7 +30,6 @@ const users = (state, action) => {
         updatedOrder["Products"] = updatedProducts;
         updatedAllOrders.push(updatedOrder);
       }
-      console.log(ordersFromLS);
 
       return {
         ...state,

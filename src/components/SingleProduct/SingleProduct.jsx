@@ -4,12 +4,24 @@ import { ProductContext } from "../../context/ProductContext/ProductState";
 import "./Singleproduct.scss";
 import { useParams } from "react-router-dom";
 import Footer from "../Footer/Footer";
-import { UserContext } from "../../context/UserContext/UserState";
 
 const SingleProduct = () => {
-  const { products, getSingleProduct, addItem, totalItems, totalPrice } = useContext(ProductContext);
+  const { products, getSingleProduct, addItem } = useContext(ProductContext);
   const API_URL = "http://localhost:3000/";
   const { id } = useParams();
+
+  const numberOfStars = (num) => {
+    return (
+      <>
+      {Array.from({ length: num }, (_, index) => (
+        <span className="material-icons" style={{color:"orange"}}>star</span>
+      ))}
+      {Array.from({ length: 5 - num }, (_, index) => (
+        <span className="material-icons" style={{color:"gray"}}>star</span>
+      ))}
+      </>
+    )
+  }
 
   useEffect(() => {
     getSingleProduct(id);
@@ -57,6 +69,19 @@ const SingleProduct = () => {
             </div>
           </section>
         </main>
+        <div className="reviewsBlock">
+          {product.Reviews.map(review => {
+            return (
+              <div className="singleReview" key={review.id}>
+                <p> User ID: {review.UserId}</p>
+                <p><strong>{review.title}</strong></p>
+                <p>{review.content}</p>
+                <p>{numberOfStars(review.stars)}</p>
+                <hr style={{ width: "90%", textAlign: "center", margin: "0 auto" }}/>
+              </div>
+            )
+          })}
+        </div>
       </div>
     );
   });

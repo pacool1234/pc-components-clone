@@ -47,7 +47,7 @@
 
 .purchasedItemDiv {
   display: flex;
-  margin: 3% 6%;
+  margin: 3% 6% 4% 6%;
   .leftPurchasedItemSubDiv {
     margin-right: 5%;
     width: 15%;
@@ -57,10 +57,27 @@
     #productName {
       font-size: 1rem;
       text-align: left;
+      cursor: pointer;
+    }
+    #productName:hover {
+      font-weight: 600;
     }
     .discountPriceDiv {
       display: flex;
       align-items: center;
     }
+    .amountPurchasedDiv {
+      position: relative;
+      p {
+        position: absolute;
+        top: 5px;
+      }
+    }
+  }
+  .starsItemSubDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25%;
   }
 }
