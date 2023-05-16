@@ -39,6 +39,9 @@ const Home = () => {
   return (
     <>
       <Header />
+      <div className="topSection">
+        <p><strong>Voted No.1</strong> Marketplace for all Technology related</p>
+      </div> 
       <div className="orange">
         <img src="../src/images/orange_days.png" className="orangeImg"/>
         <div className="categories">{categoriesDiv}</div>

@@ -41,6 +41,12 @@ export const ProductProvider = ({ children }) => {
     });
   };
 
+  const sortBestSeller = () => {
+    dispatch({
+      type: "SORT_BEST_SELLER",
+    });
+  };
+
   const getSingleProduct = async (id) => {
     const res = await axios.get(API_URL + "products/getAll");
     const productsFiltered = res.data.filter((product) => product.id == id);
@@ -88,6 +94,7 @@ export const ProductProvider = ({ children }) => {
         totalPrice: state.totalPrice,
         getProducts,
         sort,
+        sortBestSeller,
         getSingleProduct,
         addItem,
         subtractItem,

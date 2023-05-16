@@ -3,6 +3,29 @@
   position: fixed;
   top: 0;
   width: 100%;
+  background-color: white;
+  nav {
+    height: 80px;
+    border-bottom: 1px solid lightgray;
+
+  }
+}
+
+.subNavbar {
+  background-color: white;
+  height: 38px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  .subNavDiv {
+    // width: 33.3%;
+    * {
+      margin: 0;
+    }
+  }
+  .experts {
+    width: 50%;
+  }
 }
 
 #navbarContainer {
@@ -21,6 +44,19 @@
   justify-content: space-evenly;
   /* margin-bottom: 0 !important; */
   width: 100%;
+}
+
+.myAccount {
+  display: flex;
+  align-items: center;
+  span {
+    margin-left: 35%;
+    font-size: 2.1rem;
+  }
+  p {
+    margin: 0 0 0 3%;
+    vertical-align: middle;
+  }
 }
 
 .badge {
@@ -58,4 +94,61 @@
   color: white;
   font-weight: 800;
   text-decoration: none;
+}
+
+#shoppingCartLogo:hover {
+  color: #ff6000;
+}
+
+// Dropdown menu
+.menuTrigger{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  span {
+    cursor: pointer;
+  }
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 125px;
+  left: 70px;
+  background-color: white;
+  border: 1px solid gray;
+  border-radius: 3px;
+  width: 210px;
+}
+
+.dropdownMenu ul li {
+  padding: 10px 0;
+  list-style-type: none;
+  display: flex;
+  p {
+    margin-left: 9% !important;
+  }
+}
+
+.dropdownMenu ul li:hover {
+  color: #ff6000;
+  cursor: pointer;
+}
+
+.dropdownItem p {
+  text-align: left;
+}
+
+.dropdownMenu.active {
+  // opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: 500ms ease;
+  background-color: white;
+}
+.dropdownMenu.inactive {
+  background-color: white;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-20px);
+  transition: 500ms ease;
 }

@@ -11,6 +11,7 @@ const Products = () => {
     products,
     getProducts,
     sort,
+    sortBestSeller,
   } = useContext(ProductContext);
 
   const API_URL = "http://localhost:3000/";
@@ -19,7 +20,7 @@ const Products = () => {
 
   useEffect(() => {
     getProducts(id);
-  }, []);
+  }, [id]);
 
   const productsContainer = products.map((product) => {
     return (
@@ -65,10 +66,13 @@ const Products = () => {
       <h1>Main page displaying products</h1>
       <div className="filterContainer row">
         <div className="col">
-          <button onClick={() => sort("price", true)}>Lowest price</button>
+          <button onClick={() => sortBestSeller()}>Best seller</button>
         </div>
         <div className="col">
-          <button onClick={() => sort("price", false)}>Highest price</button>
+          <button onClick={() => sort("discountedPrice", true)}>Lowest price</button>
+        </div>
+        <div className="col">
+          <button onClick={() => sort("discountedPrice", false)}>Highest price</button>
         </div>
         <div className="col">
           <button onClick={() => sort("name", true)}>A-Z</button>

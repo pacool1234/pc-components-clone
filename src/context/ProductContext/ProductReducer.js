@@ -1,9 +1,16 @@
 const products = (state, action) => {
   switch (action.type) {
     case "GET_PRODUCTS":
+      const productsWithDiscountedPrice = [];
+      action.payload.forEach((product) => {
+        const singleProduct = product;
+        singleProduct["discountedPrice"] =
+          Number(product["price"]) * (1 - Number(product["discount"]) / 100);
+        productsWithDiscountedPrice.push(product);
+      });
       return {
         ...state,
-        products: action.payload,
+        products: productsWithDiscountedPrice,
       };
 
     case "SORT":
@@ -27,6 +34,18 @@ const products = (state, action) => {
         products: sorted,
       };
 
+    case "SORT_BEST_SELLER":
+      const sortedBestSeller = state.products.sort(function (a, b) {
+        let keyA, keyB;
+        keyA = a.unitsSold;
+        keyB = b.unitsSold;
+        return keyA < keyB ? 1 : -1;
+      });
+      return {
+        ...state,
+        products: sortedBestSeller,
+      };
+
     case "ADD_ITEM":
       const cartFromLS = JSON.parse(localStorage.getItem("cart"));
       const productAlreadyPresent = cartFromLS.some(
@@ -36,9 +55,6 @@ const products = (state, action) => {
         state.cart = state.cart.map((item) => {
           if (item.id == action.payload["id"]) {
             item.amount++;
-            // state.totalPrice +=
-            //   Number(action.payload["price"]) *
-            //   (1 - Number(action.payload["discount"]) / 100);
           }
           return item;
         });
@@ -46,7 +62,14 @@ const products = (state, action) => {
           ...state,
           cart: [...state.cart],
           totalItems: state.cart.reduce((total, obj) => total + obj.amount, 0),
-          totalPrice: state.cart.reduce((total, obj) => total + Number(obj.amount) * Number(obj.price) * (1 - Number(obj.discount) / 100), 0)
+          totalPrice: state.cart.reduce(
+            (total, obj) =>
+              total +
+              Number(obj.amount) *
+                Number(obj.price) *
+                (1 - Number(obj.discount) / 100),
+            0
+          ),
         };
       } else {
         action.payload["amount"] = 1;
@@ -56,7 +79,14 @@ const products = (state, action) => {
           ...state,
           cart: newCart,
           totalItems: newCart.reduce((total, obj) => total + obj.amount, 0),
-          totalPrice: newCart.reduce((total, obj) => total + Number(obj.amount) * Number(obj.price) * (1 - Number(obj.discount) / 100), 0)
+          totalPrice: newCart.reduce(
+            (total, obj) =>
+              total +
+              Number(obj.amount) *
+                Number(obj.price) *
+                (1 - Number(obj.discount) / 100),
+            0
+          ),
         };
       }
 
@@ -78,12 +108,24 @@ const products = (state, action) => {
         ...state,
         cart: [...state.cart],
         totalItems: state.cart.reduce((total, obj) => total + obj.amount, 0),
-        totalPrice: state.cart.reduce((total, obj) => total + Number(obj.amount) * Number(obj.price) * (1 - Number(obj.discount) / 100), 0)
+        totalPrice: state.cart.reduce(
+          (total, obj) =>
+            total +
+            Number(obj.amount) *
+              Number(obj.price) *
+              (1 - Number(obj.discount) / 100),
+          0
+        ),
       };
 
     case "DELETE_ITEM":
-      state.cart = state.cart.filter((item) => item.id !== action.payload["id"]);
-      state.totalPrice -= Number(action.payload["amount"]) * Number(action.payload["price"]) * (1 - Number(action.payload["discount"]) / 100);
+      state.cart = state.cart.filter(
+        (item) => item.id !== action.payload["id"]
+      );
+      state.totalPrice -=
+        Number(action.payload["amount"]) *
+        Number(action.payload["price"]) *
+        (1 - Number(action.payload["discount"]) / 100);
       return {
         ...state,
         cart: [...state.cart],

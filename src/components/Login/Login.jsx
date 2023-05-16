@@ -50,11 +50,13 @@ const Login = () => {
         navigate("/profile");
       }, 2500);
     }
-    if (token.length > 0) {
+    if (token && token.length > 0) {
       toastRef.current.innerHTML = "You have successfully logged in";
       setShowToast(true);
-    } 
-
+    }
+    if(!token) {
+      console.log('wassuuuuuup');
+    }
   }, [token]);
 
   return (

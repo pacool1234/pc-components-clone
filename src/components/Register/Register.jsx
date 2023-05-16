@@ -1,70 +1,108 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useState, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "./Register.scss";
 import { UserContext } from "../../context/UserContext/UserState";
 
 const Register = () => {
-  const { message, role } = useContext(UserContext);
-  const [nameValidationMsg, setNameValidationMsg] = useState("");
-  const [passwordValidationMsg, setPasswordValidationMsg] = useState("");
-  const [password2ValidationMsg, setPassword2ValidationMsg] = useState("");
-  const [data, setData] = useState({
+  const { register, token, message } = useContext(UserContext);
+  const [showToast, setShowToast] = useState(false);
+  const toastRef = useRef(null);
+
+  let navigate = useNavigate();
+
+  const [input, setInput] = useState({
     name: "",
     surname: "",
     email: "",
     password: "",
     password2: "",
   });
-  const [btnDisabled, setBtnDisabled] = useState(true);
-  const [showToast, setShowToast] = useState(false);
-  let navigate = useNavigate();
 
-  const nameRef = useRef(null);
-  const surnameRef = useRef(null);
-  const emailRef = useRef(null);
-  const passwordRef = useRef(null);
-  const password2Ref = useRef(null);
+  const [error, setError] = useState({
+    name: "",
+    surname: "",
+    email: "",
+    password: "",
+    password2: "",
+  });
 
-  const handleInputChange = (event) => {
-    if (data.name.length + 1 < 3) {
-      setNameValidationMsg("Name must be at least 3 characters");
-      setBtnDisabled(true);
-    } else {
-      setNameValidationMsg(null);
-    }
-    if (data.password.length + 1 < 8) {
-      setPasswordValidationMsg("Password must be at least 8 characters");
-      setBtnDisabled(true);
-    } else {
-      setPasswordValidationMsg(null);
-    }
-    // if (data.password.length + 1 < 8) {
-    //   setPasswordValidationMsg("Password must be at least 8 characters");
-    //   setBtnDisabled(true);
-    // } else {
-    //   setPasswordValidationMsg(null);
-    // }
-    if (data.name.length + 1 >= 3 && data.password.length + 1 >= 8) {
-      setBtnDisabled(false);
-    }
-    setData({
-      ...data,
-      [event.target.name]: event.target.value,
+  const onInputChange = (e) => {
+    const { name, value } = e.target;
+    setInput((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+    validateInput(e);
+  };
+
+  const validateInput = (e) => {
+    let { name, value } = e.target;
+    setError((prev) => {
+      const stateObj = { ...prev, [name]: "" };
+
+      switch (name) {
+        case "name":
+          if (!value) {
+            stateObj[name] = "Please enter Name.";
+          }
+          break;
+
+        case "surname":
+          if (!value) {
+            stateObj[name] = "Please enter Surname.";
+          }
+          break;
+
+        case "password":
+          if (!value) {
+            stateObj[name] = "Please enter Password.";
+          } else if (input.password2 && value !== input.password2) {
+            stateObj["password2"] = "Passwords do not match.";
+          } else {
+            stateObj["password2"] = input.password2 ? "" : error.password2;
+          }
+          break;
+
+        case "password2":
+          if (!value) {
+            stateObj[name] = "Please confirm Password.";
+          } else if (input.password && value !== input.password) {
+            stateObj[name] = "Passwords do not match.";
+          }
+          break;
+
+        default:
+          break;
+      }
+
+      return stateObj;
     });
   };
+  //---------------------------------------------------------
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Use signUp function
-  
-    // Reset data
-    setData({
-      name: "",
-      email: "",
-    });
+    register(input);
+    setTimeout(() => {
+      console.log("waiting for register response");
+    }, 1500);
+
+    toastRef.current.innerHTML = message;
     setShowToast(true);
+    setTimeout(() => {
+      setShowToast(false);
+    }, 1500);
+    if (message === "User created") {
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+    }
   };
+
+  useEffect(() => {
+    console.log("refreshing register page");
+  }, [])
 
   return (
     <>
@@ -93,76 +131,79 @@ const Register = () => {
             </div>
           </div>
           <div className="logoContainer">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                enableBackground="new 0 0 24 24"
-                className="sc-pGacB jVEfMO sc-jhLFFE fciOeo"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M12 1.293a7.13 7.13 0 0 0-7.125 7.125A7.13 7.13 0 0 0 12 15.543a7.13 7.13 0 0 0 7.125-7.125A7.13 7.13 0 0 0 12 1.293zM4.125 8.418C4.125 4.07 7.648.543 12 .543s7.875 3.527 7.875 7.875c0 1.84-.63 3.53-1.687 4.87l3.44 7.203-3.81-.422-2.117 3.387-3.328-7.172c-.125.008-.246.008-.37.008s-.246-.004-.37-.008L8.3 23.457 6.188 20.07l-3.816.422 3.44-7.2a7.83 7.83 0 0 1-1.687-4.875zm9.04 7.79c1.75-.258 3.31-1.094 4.488-2.305l2.72 5.69-2.94-.328-1.633 2.617zm-6.816-2.3c1.18 1.21 2.738 2.047 4.488 2.305l-2.633 5.676-1.637-2.617-2.94.328zm7.066-7.047l-1.387-2.867-1.43 2.844-3.148.434 2.258 2.242-.562 3.13 2.828-1.457 2.805 1.5-.512-3.14L16.56 7.34zM11.1 7.53l.922-1.84.895 1.852 2.035.31-1.484 1.426.336 2.027-1.812-.97-1.824.94.363-2.027-1.465-1.445zm0 0"
-                ></path>
-              </svg>
-              <div>
-                <h4>BBBBBB</h4>
-                <span>bbbbbb</span>
-              </div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              enableBackground="new 0 0 24 24"
+              className="sc-pGacB jVEfMO sc-jhLFFE fciOeo"
+            >
+              <path
+                fillRule="evenodd"
+                d="M12 1.293a7.13 7.13 0 0 0-7.125 7.125A7.13 7.13 0 0 0 12 15.543a7.13 7.13 0 0 0 7.125-7.125A7.13 7.13 0 0 0 12 1.293zM4.125 8.418C4.125 4.07 7.648.543 12 .543s7.875 3.527 7.875 7.875c0 1.84-.63 3.53-1.687 4.87l3.44 7.203-3.81-.422-2.117 3.387-3.328-7.172c-.125.008-.246.008-.37.008s-.246-.004-.37-.008L8.3 23.457 6.188 20.07l-3.816.422 3.44-7.2a7.83 7.83 0 0 1-1.687-4.875zm9.04 7.79c1.75-.258 3.31-1.094 4.488-2.305l2.72 5.69-2.94-.328-1.633 2.617zm-6.816-2.3c1.18 1.21 2.738 2.047 4.488 2.305l-2.633 5.676-1.637-2.617-2.94.328zm7.066-7.047l-1.387-2.867-1.43 2.844-3.148.434 2.258 2.242-.562 3.13 2.828-1.457 2.805 1.5-.512-3.14L16.56 7.34zM11.1 7.53l.922-1.84.895 1.852 2.035.31-1.484 1.426.336 2.027-1.812-.97-1.824.94.363-2.027-1.465-1.445zm0 0"
+              ></path>
+            </svg>
+            <div>
+              <h4>BBBBBB</h4>
+              <span>bbbbbb</span>
             </div>
+          </div>
         </section>
         <section className="section" id="rightSection">
           <div>Register</div>
           <form onSubmit={handleSubmit}>
-            <div ref={nameRef} className="form-group">
+            <div className="form-group">
               <input
                 type="text"
                 placeholder="Name"
-                value={data.name}
-                onChange={handleInputChange}
                 name="name"
+                onChange={onInputChange}
+                onBlur={validateInput}
               />
             </div>
-            <span>{nameValidationMsg}</span>
-            <div ref={surnameRef} className="form-group">
+            {error.name && <span className="err">{error.name}</span>}
+            <div className="form-group">
               <input
                 type="text"
                 placeholder="Surname"
-                value={data.surname}
-                onChange={handleInputChange}
                 name="surname"
+                onChange={onInputChange}
+                onBlur={validateInput}
               />
             </div>
-            <div ref={emailRef} className="form-group">
+            <div className="form-group">
               <input
                 type="email"
                 placeholder="Email address"
-                value={data.email}
-                onChange={handleInputChange}
                 name="email"
+                onChange={onInputChange}
+                onBlur={validateInput}
               />
             </div>
-            <div ref={passwordRef} className="form-group">
+            <div className="form-group">
               <input
                 type="password"
                 placeholder="Password"
-                value={data.password}
-                onChange={handleInputChange}
                 name="password"
+                onChange={onInputChange}
+                onBlur={validateInput}
+                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+                required
               />
             </div>
-            <span>{passwordValidationMsg}</span>
-            <div ref={password2Ref} className="form-group">
+            {error.password && <span className="err">{error.password}</span>}
+            <div className="form-group">
               <input
                 type="password"
                 placeholder="Confirm your password"
-                value={data.password2}
-                onChange={handleInputChange}
                 name="password2"
+                onChange={onInputChange}
+                onBlur={validateInput}
+                required
               />
             </div>
-            <button type="submit" disabled={btnDisabled}>
-              Enviar
-            </button>
+            {error.password2 && <span className="err">{error.password2}</span>}
+            <button type="submit">Enviar</button>
           </form>
 
           <div
@@ -174,18 +215,10 @@ const Register = () => {
             aria-atomic="true"
           >
             <div className="toast-header">
-              <strong className="me-auto"></strong>
-              <button
-                type="button"
-                className="btn-close"
-                aria-label="Close"
-                onClick={() => setShowToast(false)}
-              ></button>
+              <div className="toast-body" ref={toastRef}></div>
             </div>
-            <div className="toast-body">A confirmation email has been sent</div>
-            <div className="toast-body"></div>
           </div>
-       
+
           <p className="hLine">
             <span>I already have an account</span>
           </p>

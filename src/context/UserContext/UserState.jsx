@@ -5,7 +5,7 @@ import UserReducer from "./UserReducer";
 const token = JSON.parse(localStorage.getItem("token"));
 
 const initialState = {
-  token: token ? token : '',
+  token: token ? token : "",
   user: null,
   role: "",
   message: "",
@@ -19,8 +19,8 @@ export const UserContext = createContext(initialState);
 export const UserProvider = ({ children }) => {
   const [state, dispatch] = useReducer(UserReducer, initialState);
 
-  const login = async (user) => {
-    const res = await axios.post(API_URL + "users/login", user);
+  const login = async (data) => {
+    const res = await axios.post(API_URL + "users/login", data);
     dispatch({
       type: "LOGIN",
       payload: res.data,
@@ -72,6 +72,21 @@ export const UserProvider = ({ children }) => {
     }
   };
 
+  const register = async (data) => {
+    try {
+      const res = await axios.post(API_URL + "users/create", data);
+      dispatch({ type: "REGISTER_SUCCESS", payload: res.data });
+    } catch (error) {
+      if (error.res) {
+        dispatch({ type: "REGISTER_FAIL", payload: error.res.data });
+      } else if (error.request) {
+        dispatch({ type: "REGISTER_FAIL", payload: "Email address already in use" });
+      } else {
+        dispatch({ type: "REGISTER_FAIL", payload: error.message });
+      }
+    }
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -84,6 +99,7 @@ export const UserProvider = ({ children }) => {
         getUserInfo,
         getOrders,
         logout,
+        register,
       }}
     >
       {children}

@@ -5,7 +5,6 @@ const users = (state, action) => {
         ...state,
         token: action.payload.token,
         role: action.payload.user.role,
-        message: action.payload.message,
       };
     case "GET_USER_INFO":
       return {
@@ -23,7 +22,7 @@ const users = (state, action) => {
           const singleProduct = product;
           // iterate ordersFromLS to find and assign amount to singleProduct
           const userSingleOrderObjectLS = ordersFromLS[order.UserId][order.id];
-          const amount = userSingleOrderObjectLS[product.id]
+          const amount = userSingleOrderObjectLS[product.id];
           // finally
           singleProduct["amount"] = amount;
           updatedProducts.push(singleProduct);
@@ -43,6 +42,18 @@ const users = (state, action) => {
         user: null,
         role: null,
         token: null,
+      };
+    case "REGISTER_SUCCESS":
+      console.log("Success!!!");
+      return {
+        ...state,
+        message: action.payload.message,
+      };
+    case "REGISTER_FAIL":
+      console.log("this is the error", action.payload)
+      return {
+        ...state,
+        message: action.payload,
       };
     default:
       return state;
