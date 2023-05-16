@@ -49,3 +49,43 @@
     font-size: 1rem;
   }
 }
+
+.infoBlock {
+  padding: 3% 1% 2% 1%;
+  display: flex;
+  justify-content: space-evenly;
+  height: fit-content;
+  .infoTitle {
+    .infoHeader {
+      font-weight: 600;
+      text-align: left;
+    }
+    .infoli {
+      text-align: left;
+    }
+    .infoli:hover {
+      background-color: rgb(237, 237, 237);
+      cursor: pointer;
+    }
+    .communityli {
+      margin-bottom: 17px;
+      margin-left: 0;
+      display: flex;
+      justify-content: left;
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+      span {
+        margin-left: 6%;
+      }
+    }
+    .communityli:hover {
+      background-color: rgb(237, 237, 237);
+      cursor: pointer;
+    }
+  }
+  .communityTitle {
+    width: 20%;
+  }
+}
