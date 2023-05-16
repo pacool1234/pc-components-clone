@@ -15,43 +15,60 @@
 
 .singleProductName {
   text-align: left;
+  font-weight: 500;
 }
 
 .priceBlock {
   display: flex;
+  height: 50px;
 }
 
-.priceBlock > * {
-  margin-right: 15px;
-}
-
-.originalPriceDiv, .discountDiv > * {
-  margin-bottom: 0;
-}
-
-.discountProductPrice {
+.discountPriceDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .discountProductPrice {
     color: #ff6000;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-weight: 700;
     white-space: nowrap;
+    margin: 0;
+  }
 }
 
-.originalProductPrice {
+.originalPriceDiv {
+  margin: 0 9%;
+  .originalProductPrice {
     color: gray;
     font-size: 0.8rem;
     font-weight: 700;
     text-decoration: line-through
+  }
+} 
+
+.discountDiv {
+  margin: 0;
+  .discount {
+    background-color: #bf0019;
+    color: white;
+    font-weight: 600;
+    border-radius: 3px;
+    width: fit-content;
+    padding: 0 10%;
+  }
+}
+
+.originalPriceDiv, .discountDiv {
+  p{
+    margin: 0;
+    white-space: nowrap;
+    height: 50%;
+  }
 }
 
 .pvp, .discountTitle {
   color: rgb(195, 193, 193);
-}
-
-.discount {
-  background-color: crimson;
-  color: white;
-  font-weight: 600;
-  border-radius: 2px;
+  font-size: 0.8rem;
 }
 
 .hidden {

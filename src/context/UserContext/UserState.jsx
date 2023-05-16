@@ -87,6 +87,12 @@ export const UserProvider = ({ children }) => {
     }
   };
 
+  const clearState = () => {
+    dispatch({
+      type: "CLEAR_STATE",
+    })
+  }
+
   return (
     <UserContext.Provider
       value={{
@@ -100,6 +106,7 @@ export const UserProvider = ({ children }) => {
         getOrders,
         logout,
         register,
+        clearState,
       }}
     >
       {children}

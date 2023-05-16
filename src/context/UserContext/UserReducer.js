@@ -50,10 +50,18 @@ const users = (state, action) => {
         message: action.payload.message,
       };
     case "REGISTER_FAIL":
-      console.log("this is the error", action.payload)
+      console.log("this is the error", action.payload);
       return {
         ...state,
         message: action.payload,
+      };
+    case "CLEAR_STATE":
+      return {
+        token: "",
+        user: null,
+        role: "",
+        message: "",
+        orders: [],
       };
     default:
       return state;

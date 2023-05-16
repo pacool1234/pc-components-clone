@@ -5,7 +5,7 @@ import "./Register.scss";
 import { UserContext } from "../../context/UserContext/UserState";
 
 const Register = () => {
-  const { register, token, message } = useContext(UserContext);
+  const { register, clearState, message } = useContext(UserContext);
   const [showToast, setShowToast] = useState(false);
   const toastRef = useRef(null);
 
@@ -84,25 +84,28 @@ const Register = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     register(input);
-    setTimeout(() => {
-      console.log("waiting for register response");
-    }, 1500);
+    // setTimeout(() => {
+    //   console.log("waiting for register response");
+    // }, 1500);
 
-    toastRef.current.innerHTML = message;
-    setShowToast(true);
-    setTimeout(() => {
-      setShowToast(false);
-    }, 1500);
-    if (message === "User created") {
-      setTimeout(() => {
-        navigate("/");
-      }, 2000);
-    }
+    
   };
 
   useEffect(() => {
-    console.log("refreshing register page");
-  }, [])
+    if (message) {
+      toastRef.current.innerHTML = message;
+      setShowToast(true);
+      setTimeout(() => {
+        setShowToast(false);
+        clearState();
+      }, 1500);
+      if (message === "User created") {
+        setTimeout(() => {
+          navigate("/");
+        }, 2000);
+      }
+    }
+  }, [message])
 
   return (
     <>

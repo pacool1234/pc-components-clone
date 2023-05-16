@@ -48,7 +48,7 @@ const Cart = () => {
           />
           <p>{product.name}</p>
           <div className="priceBlock">
-            <div className="dicountPriceDiv">
+            <div className="discountPriceDiv">
               <p className="discountProductPrice">
                 {(product.price * (1 - product.discount / 100)).toFixed(2)} €
               </p>

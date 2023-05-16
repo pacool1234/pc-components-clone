@@ -14,6 +14,13 @@ const Header = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    let handler = () => {
+      setOpen(false);
+    }
+    document.addEventListener("mousedown", handler);
+  })
+
+  useEffect(() => {
     getCategories();
   }, []);
 

@@ -4,7 +4,6 @@ import Footer from "../Footer/Footer";
 import { ProductContext } from "../../context/ProductContext/ProductState";
 import "./Products.scss";
 import { useParams, useNavigate } from "react-router-dom";
-import { UserContext } from "../../context/UserContext/UserState";
 
 const Products = () => {
   const {
@@ -36,9 +35,9 @@ const Products = () => {
           height={150}
           width={150}
         />
-        <p>{product.name}</p>
+        <p className="singleProductName">{product.name}</p>
         <div className="priceBlock">
-                <div className="dicountPriceDiv">
+                <div className="discountPriceDiv">
                   <p className="discountProductPrice">
                     {(product.price * (1 - product.discount / 100)).toFixed(2)} €
                   </p>

@@ -16,7 +16,11 @@
   padding: 2% 5%;
   .productDiv {
     width: 25%;
+    height: 350px;
     padding: 2%;
+    p {
+      text-align: left;
+    }
   }
 }
 

@@ -71,7 +71,7 @@ const Profile = () => {
               <div className="rightPurchasedItemSubDiv">
                 <p id="productName">{product.name}</p>
                 <div className="priceBlock">
-                  <div className="dicountPriceDiv">
+                  <div className="discountPriceDiv">
                     <p className="discountProductPrice">
                       {(product.price * (1 - product.discount / 100)).toFixed(
                         2
@@ -113,10 +113,6 @@ const Profile = () => {
   return (
     <>
       <Header />
-      <div className="ordersHistoryTitle">
-        <h2 id="blank" style={{color:"white"}}>.</h2>
-        <h2>Orders History</h2>
-      </div>
       <main className="profileContainer">
         <section className="userInfoSection">
           <h3>{user.name} {user.surname}</h3>
