@@ -62,7 +62,6 @@ const Products = () => {
   return (
     <>
       <Header />
-      <h1>Main page displaying products</h1>
       <div className="filterContainer row">
         <div className="col">
           <button onClick={() => sortBestSeller()}>Best seller</button>

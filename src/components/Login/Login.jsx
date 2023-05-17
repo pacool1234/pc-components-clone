@@ -5,7 +5,7 @@ import "./Login.scss";
 import { UserContext } from "../../context/UserContext/UserState";
 
 const Login = () => {
-  const { login, message, role, token } = useContext(UserContext);
+  const { login, token } = useContext(UserContext);
   const [data, setData] = useState({
     email: "",
     password: "",

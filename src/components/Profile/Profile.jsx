@@ -15,8 +15,8 @@ const Profile = () => {
   const toOrderNumber = (orderNumber) => {
     let stringOrdNum = String(orderNumber);
     stringOrdNum = "00000" + stringOrdNum;
-    stringOrdNum = stringOrdNum.substring(stringOrdNum.length - 6)
-    return stringOrdNum
+    stringOrdNum = stringOrdNum.substring(stringOrdNum.length - 6);
+    return stringOrdNum;
   };
 
   useEffect(() => {
@@ -40,9 +40,7 @@ const Profile = () => {
         <div className="orderHeader">
           <div className="orderSubHeader">
             <div className="subHeaderTitle">Ordered</div>
-            <div className="subHeaderValue">
-              {new Date(order.createdAt).toISOString().split("T")[0]}
-            </div>
+            <div className="subHeaderValue">{order.createdAt.slice(0, 10)}</div>
           </div>
           <div className="orderSubHeader">
             <div className="subHeaderTitle ">Seller</div>
@@ -71,7 +69,12 @@ const Profile = () => {
                   />
                 </div>
                 <div className="rightPurchasedItemSubDiv">
-                  <p id="productName" onClick={() => navigate(`/single/${product.id}`)}>{product.name}</p>
+                  <p
+                    id="productName"
+                    onClick={() => navigate(`/single/${product.id}`)}
+                  >
+                    {product.name}
+                  </p>
                   <div className="priceBlock">
                     <div className="discountPriceDiv">
                       <p className="discountProductPrice">
@@ -101,10 +104,12 @@ const Profile = () => {
                   </div>
                 </div>
                 <div className="starsItemSubDiv">
-                  <ReviewForm />
+                  <ReviewForm userId={user.id} productId={product.id}/>
                 </div>
               </div>
-              <hr style={{ width: "90%", textAlign: "center", margin: "0 auto" }}/>
+              <hr
+                style={{ width: "90%", textAlign: "center", margin: "0 auto" }}
+              />
             </>
           );
         })}
@@ -134,7 +139,6 @@ const Profile = () => {
         </section>
         <section className="ordersHistory">{allOrders}</section>
       </main>
-
       <Footer />
     </>
   );

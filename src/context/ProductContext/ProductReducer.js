@@ -94,9 +94,6 @@ const products = (state, action) => {
         if (item.id == action.payload["id"]) {
           if (item.amount > 1) {
             item.amount--;
-            // state.totalPrice -=
-            //   Number(action.payload["price"]) *
-            //   (1 - Number(action.payload["discount"]) / 100);
           } else {
             item.amount = 1;
           }
@@ -138,6 +135,7 @@ const products = (state, action) => {
         totalItems: 0,
         totalPrice: 0,
       };
+
     default:
       return state;
   }

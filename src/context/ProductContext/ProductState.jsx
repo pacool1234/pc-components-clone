@@ -83,7 +83,18 @@ export const ProductProvider = ({ children }) => {
     });
   };
 
-
+  const reviewProduct = async (data) => {
+    try {
+      const token = JSON.parse(localStorage.getItem("token"));
+      const res = await axios.post(API_URL + "reviews/create", data, {
+        headers: {
+          Authorization: token,
+        },
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <ProductContext.Provider
@@ -100,6 +111,7 @@ export const ProductProvider = ({ children }) => {
         subtractItem,
         deleteItem,
         clearCart,
+        reviewProduct,
       }}
     >
       {children}

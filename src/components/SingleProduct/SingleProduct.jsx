@@ -76,6 +76,7 @@ const SingleProduct = () => {
                 <p> User ID: {review.UserId}</p>
                 <p><strong>{review.title}</strong></p>
                 <p>{review.content}</p>
+                <p>{review.createdAt.slice(0,10)}</p>
                 <p>{numberOfStars(review.stars)}</p>
                 <hr style={{ width: "90%", textAlign: "center", margin: "0 auto" }}/>
               </div>

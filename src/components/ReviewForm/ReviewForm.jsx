@@ -1,24 +1,26 @@
 import React from "react";
 import { Button, Modal, Form } from "react-bootstrap";
-import { useState, useRef, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useState, useRef, useContext } from "react";
 import "./ReviewForm.scss";
+import { ProductContext } from "../../context/ProductContext/ProductState";
 
-function ReviewForm() {
+function ReviewForm(props) {
+  const { reviewProduct } = useContext(ProductContext);
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const [data, setData] = useState({
-    email: "",
-    password: "",
+    title: "",
+    content: "",
+    stars: 0,
+    UserId: props.userId,
+    ProductId: props.productId
   });
-  const [showToast, setShowToast] = useState(false);
-  const navigate = useNavigate();
 
-  const passwordRef = useRef(null);
-  const emailRef = useRef(null);
+  const contentRef = useRef(null);
+  const titleRef = useRef(null);
+  const starsRef = useRef(null);
 
   const handleInputChange = (event) => {
     setData({
@@ -29,21 +31,18 @@ function ReviewForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    login(data);
-    // Reset data
+    reviewProduct(data);
+    setShow(false);
     setData({
-      email: "",
-      password: "",
+      title: "",
+      content: "",
+      stars: 0,
     });
-    // SOFIA: always displays "Incorrect email/password"!!!!
-    if (token.length <= 0) {
-      toastRef.current.innerHTML = "Incorrect email/password";
-      console.log(token.length > 0);
-      setShowToast(true);
-      setTimeout(() => {
-        setShowToast(false);
-      }, 1500);
-    }
+    // toastRef.current.innerHTML = "Review created";
+    // setShowToast(true);
+    // setTimeout(() => {
+    //   setShowToast(false);
+    // }, 1500);
   };
 
   return (
@@ -56,48 +55,39 @@ function ReviewForm() {
         </Modal.Header>
         <Modal.Body>
           <form onSubmit={handleSubmit}>
-            <div ref={emailRef} className="form-group">
+            <div ref={titleRef} className="form-group">
               <input
-                type="email"
-                placeholder="email"
-                value={data.email}
+                type="text"
+                placeholder="title"
+                value={data.title}
                 onChange={handleInputChange}
-                name="email"
+                name="title"
               />
             </div>
-            <div ref={passwordRef} className="form-group">
+            <div ref={contentRef} className="form-group">
               <input
-                type="password"
-                placeholder="password"
-                value={data.password}
+                type="text"
+                placeholder="content"
+                value={data.content}
                 onChange={handleInputChange}
-                name="password"
+                name="content"
               />
             </div>
-            <button type="submit">Enviar</button>
+            <div ref={starsRef} className="form-group">
+              <input
+                type="number"
+                placeholder="# stars"
+                value={data.stars}
+                onChange={handleInputChange}
+                name="stars"
+                min={0}
+                max={5}
+              />
+            </div>
           </form>
-          {/* <Form>
-            <Form.Group controlId="formTitle">
-              <Form.Label>Title</Form.Label>
-              <Form.Control type="text" placeholder="Enter title" />
-            </Form.Group>
-
-            <Form.Group controlId="formContent">
-              <Form.Label>Content</Form.Label>
-              <Form.Control as="textarea" rows={3} placeholder="Enter content" />
-            </Form.Group>
-
-            <Form.Group controlId="formStars">
-              <Form.Label>Number of Stars</Form.Label>
-              <Form.Control type="number" min={1} max={5} placeholder="Enter number of stars" />
-            </Form.Group>
-          </Form> */}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={handleSubmit}>
             Submit
           </Button>
         </Modal.Footer>
