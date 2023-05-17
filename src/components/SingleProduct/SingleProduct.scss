@@ -19,9 +19,10 @@
   gap: 20px;
 }
 
-.singleProductName {
+#singleProductName {
   text-align: left;
-  font-weight: 600;
+  font-weight: 500;
+  font-size: 1.4rem;
 }
 
 .priceBlock {
@@ -75,6 +76,47 @@
 .pvp, .discountTitle {
   color: rgb(195, 193, 193);
   font-size: 0.8rem;
+}
+
+.purchaseBlock {
+  margin-top: 6%;
+  .addToCartButton {
+    width: 35%;
+    height: 40px;
+    background-color: white;
+    border: 1px solid rgb(197, 197, 197);
+    border-radius: 3px;
+  }
+  
+  .addToCartButton:hover {
+    color: #ff6000;
+    font-weight: 600;
+  }
+}
+
+.reviewsTitle {
+  margin-top: 50px;
+}
+
+.singleReview {
+  width: 70%;
+  margin: 3% auto;
+  .reviewHeader {
+    display: flex;
+    justify-content: space-around;
+  }
+  .reviewContent {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    gap: 20px;
+    margin-bottom: 20px;
+    p {
+      width: 30%;
+      text-align: left;
+      margin-left: 20%;
+    }
+  }
 }
 
 .hidden {

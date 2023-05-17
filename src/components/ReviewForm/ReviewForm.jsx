@@ -15,12 +15,8 @@ function ReviewForm(props) {
     content: "",
     stars: 0,
     UserId: props.userId,
-    ProductId: props.productId
+    ProductId: props.productId,
   });
-
-  const contentRef = useRef(null);
-  const titleRef = useRef(null);
-  const starsRef = useRef(null);
 
   const handleInputChange = (event) => {
     setData({
@@ -36,7 +32,7 @@ function ReviewForm(props) {
     setData({
       title: "",
       content: "",
-      stars: 0,
+      stars: stars > 5 ? 5 : stars,
     });
     // toastRef.current.innerHTML = "Review created";
     // setShowToast(true);
@@ -47,7 +43,9 @@ function ReviewForm(props) {
 
   return (
     <>
-      <button onClick={handleShow}>Review</button>
+      <button className="reviewButton" onClick={handleShow}>
+        Review
+      </button>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -55,7 +53,7 @@ function ReviewForm(props) {
         </Modal.Header>
         <Modal.Body>
           <form onSubmit={handleSubmit}>
-            <div ref={titleRef} className="form-group">
+            <div className="form-group">
               <input
                 type="text"
                 placeholder="title"
@@ -64,7 +62,7 @@ function ReviewForm(props) {
                 name="title"
               />
             </div>
-            <div ref={contentRef} className="form-group">
+            <div className="form-group">
               <input
                 type="text"
                 placeholder="content"
@@ -73,7 +71,7 @@ function ReviewForm(props) {
                 name="content"
               />
             </div>
-            <div ref={starsRef} className="form-group">
+            <div className="form-group">
               <input
                 type="number"
                 placeholder="# stars"
@@ -87,9 +85,9 @@ function ReviewForm(props) {
           </form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" onClick={handleSubmit}>
+          <button id="submitButton" onClick={handleSubmit}>
             Submit
-          </Button>
+          </button>
         </Modal.Footer>
       </Modal>
     </>

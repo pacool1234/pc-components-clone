@@ -10,7 +10,16 @@ const SingleProduct = () => {
   const API_URL = "http://localhost:3000/";
   const { id } = useParams();
 
+  const toUserID = (id) => {
+    let stringID = String(id);
+    stringID = "00000" + stringID;
+    stringID = stringID.substring(stringID.length - 6);
+    stringID = "#" + stringID;
+    return stringID;
+  };
+
   const numberOfStars = (num) => {
+    num = num > 5 ? 5 : num;
     return (
       <>
       {Array.from({ length: num }, (_, index) => (
@@ -42,7 +51,7 @@ const SingleProduct = () => {
           <section className="infoSection">
             <div className="productData">
               <div className="productHeader">
-                <h6 className="singleProductName">{product.name}</h6>
+                <h6 id="singleProductName">{product.name}</h6>
               </div>
               <div className="priceBlock">
                 <div className="discountPriceDiv">
@@ -64,20 +73,26 @@ const SingleProduct = () => {
                 )}
               </div>
               <div className="purchaseBlock">
-                <button onClick={() => addItem(product)}>Add to Cart</button>
+                <button className="addToCartButton" onClick={() => addItem(product)}>Add to Cart</button>
               </div>
             </div>
           </section>
         </main>
+        <hr style={{ width: "90%", textAlign: "center", margin: "0 auto" }}/>
         <div className="reviewsBlock">
+          <h3 className="reviewsTitle">Reviews</h3>
           {product.Reviews.map(review => {
             return (
               <div className="singleReview" key={review.id}>
-                <p> User ID: {review.UserId}</p>
-                <p><strong>{review.title}</strong></p>
-                <p>{review.content}</p>
-                <p>{review.createdAt.slice(0,10)}</p>
-                <p>{numberOfStars(review.stars)}</p>
+                <div className="reviewHeader">
+                  <p> User ID: {toUserID(review.UserId)}</p>
+                  <p>{review.createdAt.slice(0,10)}</p>
+                </div>
+                  <p>{numberOfStars(review.stars)}</p>
+                <div className="reviewContent">
+                  <p><strong>{review.title}</strong></p>
+                  <p>&ldquo;{review.content}&rdquo;</p>
+                </div>
                 <hr style={{ width: "90%", textAlign: "center", margin: "0 auto" }}/>
               </div>
             )

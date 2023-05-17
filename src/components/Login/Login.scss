@@ -17,12 +17,40 @@
 
 #leftSection {
   border-right: 1px solid rgb(204, 204, 204);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 30px;
+  .logoContainer {
+    max-width: 50%;
+    display: flex;
+    gap: 20px;
+    svg {
+      min-width: 70px;
+      max-width: 71px;
+      margin-left: 10%;
+    }
+    div {
+      width: 600px;
+      h5 {
+        white-space: nowrap;
+        font-weight: 500;
+        margin-bottom: 20px;
+        text-align: left;
+      }
+      p {
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        font-weight: 400;
+        text-align: left;
+        width: 300px;
+      }
+    }
+  }
+  
 }
 
-.logoContainer {
-  max-width: 50%;
-  display: flex;
-}
+
 
 .alert {
   width: 200px;
@@ -31,38 +59,63 @@
   padding: 3px;
 }
 
+#rightSection {
+  .LRTitle {
+    font-size: 2rem;
+    font-weight: 500;
+  }
+}
+
 form {
   margin-top: 20px;
-  background-color: crimson;
   border-radius: 10px;
   padding: 10px;
+  .form-group {
+    margin: 5px;
+    input {
+      width: 70%;
+      height: 40px;
+      background-color: white;
+      border: 1px solid lightgray;
+      border-radius: 3px;
+      margin-bottom: 4%;
+    }
+  }
+  .submitLR {
+    background-color: #ff6000;
+    border: 1px solid lightgray;
+    border-radius: 3px;
+    width: 70%;
+    height: 40px;
+    color: white;
+  }
 }
 
-.form-group {
-  margin: 5px;
-}
-
-.form-group > input {
-  width: 70%;
-  background-color: rgb(231, 231, 231);
-  border-radius: 8px;
-}
-
-.form > button {
-  color: blue;
-}
 
 .hLine {
   width: 100%;
   text-align: center;
-  border-bottom: 1px solid #000;
-  line-height: 0.1em;
-  margin: 10px 0 20px;
+  border-bottom: 1px solid lightgray;
+  line-height: 0.05em;
+  margin: 40px 0 40px 0;
+  span {
+    background: #fff;
+    padding: 0 10px;
+  }
 }
 
-p > span {
-  background: #fff;
-  padding: 0 10px;
+
+
+.signUpButton {
+  width: 70%;
+  height: 40px;
+  background-color: white;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+}
+
+.signUpButton:hover {
+  background-color: rgb(238, 238, 238);
 }
 
 .toast {
@@ -72,4 +125,8 @@ p > span {
     color: #155724;
     font-weight: 500;
   }
+}
+
+.submitButton {
+  background-color: red;
 }

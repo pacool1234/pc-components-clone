@@ -32,7 +32,6 @@ const Login = () => {
       email: "",
       password: "",
     });
-    // SOFIA: always displays "Incorrect email/password"!!!!
     if (token.length <= 0) {
       toastRef.current.innerHTML = "Incorrect email/password";
       console.log(token.length > 0);
@@ -41,21 +40,20 @@ const Login = () => {
         setShowToast(false);
       }, 1500);
     }
-    
   };
 
   useEffect(() => {
     if (token) {
       setTimeout(() => {
         navigate("/profile");
-      }, 2500);
+      }, 1500);
     }
     if (token && token.length > 0) {
       toastRef.current.innerHTML = "You have successfully logged in";
       setShowToast(true);
     }
-    if(!token) {
-      console.log('wassuuuuuup');
+    if (!token) {
+      console.log("wassuuuuuup");
     }
   }, [token]);
 
@@ -81,8 +79,11 @@ const Login = () => {
               ></path>
             </svg>
             <div>
-              <h4>AAAAAA</h4>
-              <span>aaaaaaa</span>
+              <h5>Manage your orders</h5>
+              <p>
+                Have all of your orders under control and receive tracking
+                notifications
+              </p>
             </div>
           </div>
           <div className="logoContainer">
@@ -98,13 +99,16 @@ const Login = () => {
               ></path>
             </svg>
             <div>
-              <h4>BBBBBB</h4>
-              <span>bbbbbb</span>
+              <h5>High quality Reasonable price</h5>
+              <p>
+                Enjoy the latest trends in technology by financing all your
+                payments
+              </p>
             </div>
           </div>
         </section>
         <section className="section" id="rightSection">
-          <div>Log in</div>
+          <div className="LRTitle">Log in</div>
           <form onSubmit={handleSubmit}>
             <div ref={emailRef} className="form-group">
               <input
@@ -124,7 +128,9 @@ const Login = () => {
                 name="password"
               />
             </div>
-            <button type="submit">Enviar</button>
+            <button type="submit" className="submitLR">
+              Log in
+            </button>
           </form>
 
           <div
@@ -138,12 +144,12 @@ const Login = () => {
             <div className="toast-body" ref={toastRef}></div>
           </div>
 
-          <p className="hLine">
+          <div className="hLine">
             <span>Not a member yet?</span>
-          </p>
+          </div>
           <div>
             <Link to="/register">
-              <button type="button" className="buttonLink">
+              <button type="button" className="signUpButton">
                 Sign up
               </button>
             </Link>

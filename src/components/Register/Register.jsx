@@ -87,8 +87,6 @@ const Register = () => {
     // setTimeout(() => {
     //   console.log("waiting for register response");
     // }, 1500);
-
-    
   };
 
   useEffect(() => {
@@ -105,7 +103,7 @@ const Register = () => {
         }, 2000);
       }
     }
-  }, [message])
+  }, [message]);
 
   return (
     <>
@@ -129,8 +127,8 @@ const Register = () => {
               ></path>
             </svg>
             <div>
-              <h4>AAAAAA</h4>
-              <span>aaaaaaa</span>
+              <h5>Manage your orders</h5>
+              <p>Have all of your orders under control and receive tracking notifications</p>
             </div>
           </div>
           <div className="logoContainer">
@@ -146,13 +144,13 @@ const Register = () => {
               ></path>
             </svg>
             <div>
-              <h4>BBBBBB</h4>
-              <span>bbbbbb</span>
+              <h5>High quality Reasonable price</h5>
+              <p>Enjoy the latest trends in technology by financing all your payments</p>
             </div>
           </div>
         </section>
         <section className="section" id="rightSection">
-          <div>Register</div>
+          <div className="LRTitle">Register</div>
           <form onSubmit={handleSubmit}>
             <div className="form-group">
               <input
@@ -206,9 +204,10 @@ const Register = () => {
               />
             </div>
             {error.password2 && <span className="err">{error.password2}</span>}
-            <button type="submit">Enviar</button>
+            <button type="submit" className="submitLR">
+              Enviar
+            </button>
           </form>
-
           <div
             className={`toast position-fixed top-0 end-0 m-3 ${
               showToast ? "show" : ""
@@ -221,13 +220,12 @@ const Register = () => {
               <div className="toast-body" ref={toastRef}></div>
             </div>
           </div>
-
-          <p className="hLine">
+          <div className="hLine">
             <span>I already have an account</span>
-          </p>
+          </div>
           <div>
             <Link to="/login">
-              <button type="button" className="buttonLink">
+              <button type="button" className="signUpButton">
                 Log in
               </button>
             </Link>

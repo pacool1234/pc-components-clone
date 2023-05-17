@@ -1,9 +1,54 @@
-.review {
-  .modal .modal-dialog .modal-content .modal-title {
-    color: red !important;
-  }
+.reviewButton {
+  background-color: white;
+  border: 1px solid rgb(197, 197, 197);
+  border-radius: 3px;
+  width: 50%;
+}
 
-  .modal .modal-dialog .modal-content .modal-body {
-    background-color: lightgrey;
+.reviewButton:hover {
+  background-color: lightgray;
+}
+
+#submitButton {
+  background-color: white !important;
+  border: 1px solid rgb(197, 197, 197);
+  border-radius: 3px;
+  width: 20%;
+  height: 33px;
+}
+
+#submitButton:hover {
+  background-color: #ff6000 !important;
+  color: white;
+  font-weight: 600;
+}
+
+.starsContainer {
+  display: flex;
+  gap: 0px;
+  input {
+    display: none;
   }
+  .star {
+    font-size: 40px;
+    color: gray;
+    width: 60px !important;
+    transition: color 0.3s ease; /* Smooth transition */
+    cursor:pointer;
+  }
+  input:checked + .star {
+    color: yellow;
+  }
+}
+
+
+
+.star:before {
+ content: "\2605";
+ position: absolute;
+ visibility:visible;
+}
+.star:checked:before {
+ content: "\2606";
+ position: absolute;
 }
