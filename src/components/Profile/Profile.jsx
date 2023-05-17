@@ -34,6 +34,8 @@ const Profile = () => {
     return "loading";
   }
 
+  orders.sort((a, b) => {return a.createdAt > b.createdAt ? -1 : 1});
+
   const allOrders = orders.map((order) => {
     return (
       <div className="singleOrder">
@@ -104,7 +106,7 @@ const Profile = () => {
                   </div>
                 </div>
                 <div className="starsItemSubDiv">
-                  <ReviewForm userId={user.id} productId={product.id}/>
+                  <ReviewForm userId={user.id} productId={product.id} />
                 </div>
               </div>
               <hr
@@ -122,19 +124,14 @@ const Profile = () => {
       <Header />
       <main className="profileContainer">
         <section className="userInfoSection">
-          <h3>
-            {user.name} {user.surname}
-          </h3>
-          <p>{user.email}</p>
-          <p>{user.role}</p>
-          <p>{user.address}</p>
-          <hr
-            style={{ width: "90%", textAlign: "center", margin: "5% auto" }}
-          />
+          <h3>{user.name} {user.surname}</h3>
+          <div className="userInfo">
+            <p><span className="material-icons">alternate_email</span>{" "} {user.email}</p>
+            <p><span className="material-icons">production_quantity_limits</span> {orders.length} orders</p>
+          </div>
+          <hr style={{ width: "90%", textAlign: "center", margin: "5% auto" }}/>
           <span>
-            <button onClick={logout} className="btn btn-danger">
-              Log out
-            </button>
+            <button onClick={logout} className="btn btn-danger">Log out</button>
           </span>
         </section>
         <section className="ordersHistory">{allOrders}</section>

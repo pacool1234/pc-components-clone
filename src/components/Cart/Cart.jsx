@@ -118,7 +118,7 @@ const Cart = () => {
               <div className="itemsDiv">{itemsDiv}</div>
               <div className="totalDiv">
                 <h1>Total</h1>
-                <p>{totalPrice.toFixed(2)} €</p>
+                <p id="totalPrice">{totalPrice.toFixed(2)} €</p>
                 <button onClick={() => handleOrder()}>Order</button>
               </div>
             </div>

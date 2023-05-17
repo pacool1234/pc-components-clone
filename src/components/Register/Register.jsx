@@ -161,7 +161,7 @@ const Register = () => {
                 onBlur={validateInput}
               />
             </div>
-            {error.name && <span className="err">{error.name}</span>}
+            {error.name && <div className="err">{error.name}</div>}
             <div className="form-group">
               <input
                 type="text"
@@ -192,7 +192,7 @@ const Register = () => {
                 required
               />
             </div>
-            {error.password && <span className="err">{error.password}</span>}
+            {error.password && <div className="err">{error.password}</div>}
             <div className="form-group">
               <input
                 type="password"
@@ -203,7 +203,7 @@ const Register = () => {
                 required
               />
             </div>
-            {error.password2 && <span className="err">{error.password2}</span>}
+            {error.password2 && <div className="err">{error.password2}</div>}
             <button type="submit" className="submitLR">
               Enviar
             </button>
