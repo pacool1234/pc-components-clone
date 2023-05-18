@@ -5,6 +5,26 @@
   align-items: center;
 }
 
+#filterButton {
+  background-color: white;
+  border: 1px solid lightgray;
+  border-radius: 3px;
+  width: fit-content;
+  padding: 3%;
+}
+
+#filterButton:hover {
+  background-color: lightgray;
+}
+
+#filterButton:active {
+  border: 1px solid #ff6000;
+}
+
+#filterButton:visited {
+  border: 1px solid #ff6000;
+}
+
 .itemCounter {
   color: gray;
 }

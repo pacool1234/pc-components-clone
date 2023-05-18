@@ -119,10 +119,10 @@ const Cart = () => {
               <div className="totalDiv">
                 <h1>Total</h1>
                 <p id="totalPrice">{totalPrice.toFixed(2)} €</p>
-                <button onClick={() => handleOrder()}>Order</button>
+                <button id="orderButton" onClick={() => handleOrder()}>Order</button>
               </div>
             </div>
-            <button onClick={() => clearCart()}>Clear cart</button>
+            <button className="btn btn-danger" onClick={() => clearCart()}>Clear cart</button>
           </>
         ) : (
           <div className="emptyCart">

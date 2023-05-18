@@ -64,19 +64,19 @@ const Products = () => {
       <Header />
       <div className="filterContainer row">
         <div className="col">
-          <button onClick={() => sortBestSeller()}>Best seller</button>
+          <button id="filterButton" onClick={() => sortBestSeller()}>Best seller</button>
         </div>
         <div className="col">
-          <button onClick={() => sort("discountedPrice", true)}>Lowest price</button>
+          <button id="filterButton" onClick={() => sort("discountedPrice", true)}>Lowest price</button>
         </div>
         <div className="col">
-          <button onClick={() => sort("discountedPrice", false)}>Highest price</button>
+          <button id="filterButton" onClick={() => sort("discountedPrice", false)}>Highest price</button>
         </div>
         <div className="col">
-          <button onClick={() => sort("name", true)}>A-Z</button>
+          <button id="filterButton" onClick={() => sort("name", true)}>A-Z</button>
         </div>
         <div className="col">
-          <button onClick={() => sort("name", false)}>Z-A</button>
+          <button id="filterButton" onClick={() => sort("name", false)}>Z-A</button>
         </div>
         <div className="col">
           <span className="itemCounter">{products.length} items</span>
